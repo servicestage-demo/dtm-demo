@@ -1,0 +1,18 @@
+server:
+  port: 8032
+
+spring:
+  application:
+    name: dtm-client
+  datasource:
+    bankb:
+      username: root
+      password: root
+      url: jdbc:mysql://127.0.0.1:3306/bankb?verifyServerCertificate=false&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    banka:
+      username: root
+      password: root
+      url: jdbc:mysql://127.0.0.1:3306/banka?verifyServerCertificate=false&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
