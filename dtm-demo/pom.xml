@@ -14,10 +14,8 @@
     </modules>
 
     <properties>
-        <sch.version>1.3.8</sch.version>
-        <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
         <spring-boot.version>2.2.6.RELEASE</spring-boot.version>
-        <dtm.version>2.2.1</dtm.version>
+        <dtm.version>2.2.2</dtm.version>
         <mysql.version>8.0.16</mysql.version>
     </properties>
 
@@ -27,20 +25,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.huaweicloud</groupId>
-                <artifactId>spring-cloud-huawei-dependencies</artifactId>
-                <version>${sch.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -57,33 +41,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
             <version>${spring-boot.version}</version>
-        </dependency>
-        <!--        Spring cloud HW       -->
-        <dependency>
-            <groupId>com.huaweicloud</groupId>
-            <artifactId>spring-cloud-starter-huawei-swagger</artifactId>
-            <version>${sch.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.huaweicloud</groupId>
-            <artifactId>spring-cloud-starter-huawei-dtm</artifactId>
-            <version>${sch.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.huaweicloud</groupId>
-            <artifactId>spring-cloud-starter-huawei-servicecomb-discovery</artifactId>
-            <version>${sch.version}</version>
-        </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.huaweicloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-huawei-config</artifactId>-->
-<!--            <version>${sch.version}</version>-->
-<!--        </dependency>-->
-
-        <dependency>
-            <groupId>com.huaweicloud</groupId>
-            <artifactId>spring-cloud-starter-huawei-router</artifactId>
-            <version>${sch.version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>

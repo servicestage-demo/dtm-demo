@@ -9,7 +9,7 @@ public enum MenuOpEnum {
     DTM_TCC_TRANSFER_LOCAL_SUCCESS("TCC 用例 -> DTM 事务 本地场景验证成功场景"),
     DTM_TCC_TRANSFER_LOCAL_FAIL_UNABLE("TCC 用例 -> 不使用DTM事务 本地场景验证失败场景"),
     DTM_TCC_TRANSFER_LOCAL_FAIL("TCC 用例 -> DTM 事务 本地场景验证失败场景"),
-    EXIT("EXIST");
+    EXIT("EXIT");
 
     private String des;
 

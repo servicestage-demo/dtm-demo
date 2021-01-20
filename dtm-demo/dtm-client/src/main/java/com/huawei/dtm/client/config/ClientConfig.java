@@ -7,11 +7,9 @@ import com.huawei.middleware.dtm.client.datasource.proxy.DTMDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
 
@@ -89,11 +87,5 @@ public class ClientConfig {
     public BankBService bankService(@Qualifier("bankBJdbcTemplate") JdbcTemplate bankJdbcTemplate,
                                     @Qualifier("bankBDataSource") DataSource dataSource) {
         return new BankBService(bankJdbcTemplate, dataSource);
-    }
-
-    @Bean
-    @LoadBalanced
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
     }
 }
