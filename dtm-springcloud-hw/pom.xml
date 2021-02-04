@@ -76,16 +76,16 @@
             <artifactId>spring-cloud-starter-huawei-servicecomb-discovery</artifactId>
             <version>${sch.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.huaweicloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-huawei-config</artifactId>-->
-<!--            <version>${sch.version}</version>-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>com.huaweicloud</groupId>
             <artifactId>spring-cloud-starter-huawei-router</artifactId>
             <version>${sch.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.log4j</groupId>
+                    <artifactId>log4j-slf4j-impl</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -97,8 +97,14 @@
             <groupId>com.huawei.middleware.dtm</groupId>
             <artifactId>dtm-client-all</artifactId>
             <version>${dtm.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-slf4j-impl</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-    </dependencies>
 
+    </dependencies>
 
 </project>
