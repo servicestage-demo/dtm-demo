@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <mirrors>
+        <mirror>
+            <id>central-proxy</id>
+            <name>Local proxy of central repo</name>
+            <url>http://wlg1.artifactory.cd-cloud-artifact.tools.huawei.com/artifactory/sz-maven-public/</url>
+            <mirrorOf>central</mirrorOf>
+        </mirror>
+    </mirrors>
+
+    <profiles>
+        <profile>
+            <id>JDK1.8</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <jdk>1.8</jdk>
+            </activation>
+            <properties>
+                <maven.compiler.source>1.8</maven.compiler.source>
+                <maven.compiler.target>1.8</maven.compiler.target>
+                <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+            </properties>
+        </profile>
+        <profile>
+            <id>central</id>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <name>mirror-maven</name>
+                    <url>http://wlg1.artifactory.cd-cloud-artifact.tools.huawei.com/artifactory/sz-maven-public/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>clouddragon</id>
+                    <name>clouddragon-maven</name>
+                    <url>http://wlg1.artifactory.cd-cloud-artifact.tools.huawei.com/artifactory/sz-maven-public/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>central-plugin</id>
+                    <name>mirror-maven-plugin</name>
+                    <url>http://wlg1.artifactory.cd-cloud-artifact.tools.huawei.com/artifactory/sz-maven-public/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+  
+    <activeProfiles>
+        <activeProfile>central</activeProfile>
+        <activeProfile>JDK1.8</activeProfile>
+    </activeProfiles>
+</settings>
