@@ -6,13 +6,7 @@ spring:
       discovery:
         version: 1.0.0
         enabled: true
-        address: http://127.0.0.1:30100
+        address: http://${cse_ip}:30100
         watch: false
         app-name: dtm-demo
         service-name: ${spring.application.name}
-      #DTM config server 配置
-#      config:
-#        server-addr: http://127.0.0.1:30113
-#        watch:
-#          delay: 1000
-#        enabled: false

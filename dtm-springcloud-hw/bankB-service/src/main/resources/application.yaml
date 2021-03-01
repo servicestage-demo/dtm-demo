@@ -6,8 +6,8 @@ spring:
     name: dtm-bankb
   datasource:
     bank:
-      username: root
-      password: 940909
-      url: jdbc:mysql://127.0.0.1:3306/bankb?verifyServerCertificate=false&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      username: ${db_user_name}
+      password: ${db_user_pwd}
+      url: jdbc:mysql://${db_ip}:3306/bankb?verifyServerCertificate=false&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       driver-class-name: com.mysql.cj.jdbc.Driver
 
