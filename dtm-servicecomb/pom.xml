@@ -18,7 +18,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <servicecomb.version>2.2.0</servicecomb.version>
-        <dtm.version>2.2.3</dtm.version>
+        <dtm.version>2.2.2</dtm.version>
         <mysql.version>8.0.16</mysql.version>
     </properties>
 
