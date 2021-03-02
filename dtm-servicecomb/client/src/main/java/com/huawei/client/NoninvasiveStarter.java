@@ -15,7 +15,9 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
-
+/**
+ * 程序的入口，根据输入分别去调用不同的场景用例
+ */
 @Component
 public class NoninvasiveStarter {
     public String lbMvcDtmTransferPath = "cse://%s/bank/transfer?transferMoney=%s&id=%s";
@@ -51,7 +53,9 @@ public class NoninvasiveStarter {
             }
         }
     }
-
+    /**
+     * 微服务调用bankA转入、bankB转出
+     */
     private void doExecuteDemo() throws InterruptedException {
         int threadNum = 10;
         int txNum = 40;
@@ -67,35 +71,6 @@ public class NoninvasiveStarter {
                         restInvoker.getForObject(String.format(lbMvcDtmTransferPath, "bank-a", money, random.nextInt() % 10),
                             String.class);
                         Thread.sleep(100);
-                    } catch (Exception e) {
-                        // ignore
-                        e.printStackTrace();
-                    }
-                }
-                countDownLatch.countDown();
-            }).start();
-        }
-        try {
-            countDownLatch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        CmdUtils.println("total cost: %s ms", System.currentTimeMillis() - beforeTime + "");
-        service.queryMoney();
-    }
-
-    private void doExecuteMulti() throws InterruptedException {
-        int threadNum = 20;
-        int txNum = 50;
-        Random random = new Random();
-        CountDownLatch countDownLatch = new CountDownLatch(threadNum);
-        long beforeTime = System.currentTimeMillis();
-        for (int i = 0; i < threadNum; i++) {
-            new Thread(() -> {
-                for (int j = 0; j < txNum; j++) {
-                    int money = 100;
-                    try {
-                        service.transfer(random.nextInt() % 10, money);
                     } catch (Exception e) {
                         // ignore
                         e.printStackTrace();

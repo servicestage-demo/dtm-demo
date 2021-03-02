@@ -32,7 +32,11 @@ public class BankAController {
     public BankAController(BankService bankAService) {
         this.bankAService = bankAService;
     }
-
+    /**
+     * bankA转入 同时调用 bankB转出
+     * @param id 账号
+     * @param transferMoney 钱数
+     */
     @DTMTxBegin(appName = "noninvasive-cse-dtmProviderA-transferIn")
     @GetMapping(value = "/transfer")
     public void dbtransfer(@RequestParam(name = "transferMoney") int transferMoney, @RequestParam(name = "id") int id) {

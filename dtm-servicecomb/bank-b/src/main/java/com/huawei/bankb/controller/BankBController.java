@@ -42,7 +42,11 @@ public class BankBController {
     public BankBController(BankService bankBService) {
         this.bankBService = bankBService;
     }
-
+    /**
+     * 概率抛出异常 同时 bankB转出
+     * @param id 账号
+     * @param transferMoney 钱数
+     */
     @DTMTxBegin(appName = "noninvasive-cse-dtmProviderB-transferIn")
     @GetMapping(value = "/transfer")
     public void dbtransfer(@RequestParam(name = "transferMoney") int transferMoney, @RequestParam(name = "id") int id) {

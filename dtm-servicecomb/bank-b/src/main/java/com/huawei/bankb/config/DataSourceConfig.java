@@ -17,7 +17,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
-
+/**
+ * bankB 增加数据源
+ */
 @Configuration
 public class DataSourceConfig {
     @Value("${spring.datasource.bankb.url}")

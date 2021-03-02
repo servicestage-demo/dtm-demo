@@ -51,7 +51,9 @@ public class ClientStarter implements ApplicationRunner {
             }
         }
     }
-
+    /**
+     * 微服务调用bankA转入、bankB转出
+     */
     private void doExecuteMicro() throws Exception {
         int threadNum = 10;
         int txNum = 40;
@@ -65,34 +67,6 @@ public class ClientStarter implements ApplicationRunner {
                     try {
                         restTemplate.getForObject(String.format(BANKA_PATH, random.nextInt() % 10, money), String.class);
                         Thread.sleep(100);
-                    } catch (Exception e) {
-                        // ignore
-                    }
-                }
-                countDownLatch.countDown();
-            }).start();
-        }
-        try {
-            countDownLatch.await();
-        } catch (Throwable throwable) {
-            // ignore
-        }
-        CmdUtils.println("total cost: %s ms", System.currentTimeMillis() - beforeTime + "");
-        transferService.queryBankMoney();
-    }
-
-    private void doExecuteLocal() throws Exception {
-        int threadNum = 20;
-        int txNum = 50;
-        Random random = new Random();
-        CountDownLatch countDownLatch = new CountDownLatch(threadNum);
-        long beforeTime = System.currentTimeMillis();
-        for (int i = 0; i < threadNum; i++) {
-            new Thread(() -> {
-                for (int j = 0; j < txNum; j++) {
-                    int money = 100;
-                    try {
-                        transferService.transferLocal(random.nextInt() % 10, money);
                     } catch (Exception e) {
                         // ignore
                     }

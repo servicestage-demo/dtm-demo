@@ -29,7 +29,9 @@ public class TransferService {
         this.bankAService = bankAService;
         this.bankBService = bankBService;
     }
-
+    /**
+     * 初始化数据库
+     */
     public void initAllAccount() {
         List<Integer> userIds = new ArrayList<>();
         for (int i = 0; i < ACCOUNT_NUMBER; i++) {
@@ -57,7 +59,9 @@ public class TransferService {
     public void queryAllMoneyWithTx() {
         queryMoney();
     }
-
+    /**
+     * 查询bankA和bankB余额
+     */
     public void queryMoney() {
         CmdUtils.println("|--- userId ---|--- bankA-money ---|--- bankB-money ---|---- sum ----|");
         for (int id = 0; id < ACCOUNT_NUMBER; id++) {
