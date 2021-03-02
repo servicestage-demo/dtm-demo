@@ -20,7 +20,9 @@ public class BankAService extends AbsBankService {
     public void transferIn(int id, int money) {
         jdbcTemplate.update(DtmConst.TransferSql.TRANSFER_IN_SQL, money, id);
     }
-
+    /**
+     * bankA 转入的TCC实现
+     */
     @DTMTccBranch(identifier = "tcc-try-transfer-in", confirmMethod = "confirm", cancelMethod = "cancel")
     public void tryTransferIn() {
         DTMContext dtmContext = DTMContext.getDTMContext();

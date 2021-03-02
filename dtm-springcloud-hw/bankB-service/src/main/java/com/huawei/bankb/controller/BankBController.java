@@ -28,7 +28,11 @@ public class BankBController {
 
     @Autowired
     private BankBService bankBService;
-
+    /**
+     * 概率抛出异常 同时 bankB转出
+     * @param id 账号
+     * @param money 钱数
+     */
     @GetMapping(value = "transfer")
     public String transfer(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money) {
         LOGGER.info("global tx id:{}, transfer out", DTMContext.getDTMContext().getGlobalTxId());

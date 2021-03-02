@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
-
+/**
+ * 程序的入口，根据输入分别去调用不同的场景用例
+ */
 @Component
 public class ClientStarter implements ApplicationRunner {
     @Autowired

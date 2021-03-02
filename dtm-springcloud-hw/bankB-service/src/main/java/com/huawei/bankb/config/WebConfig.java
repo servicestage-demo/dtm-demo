@@ -13,7 +13,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
-
+/**
+ * bankB 增加数据源
+ */
 @Configuration
 public class WebConfig {
     @Value("${spring.datasource.bank.url}")

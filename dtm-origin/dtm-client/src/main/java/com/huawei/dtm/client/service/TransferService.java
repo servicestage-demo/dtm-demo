@@ -26,44 +26,58 @@ public class TransferService {
         this.bankAService = bankAService;
         this.bankBService = bankBService;
     }
-
+    /**
+     * 非侵入用例 -> 使用DTM事务 本地场景验证
+     */
     @DTMTxBegin(appName = "transfer-local")
     public void transferLocal(int userId, int money) {
         bankAService.transferIn(userId, money);
         ExceptionUtils.addRuntimeException(50);
         bankBService.transferOut(userId, money);
     }
-
+    /**
+     * 非侵入用例 -> 不使用DTM事务 本地场景验证
+     */
     public void transferLocalUnable(int userId, int money) {
         bankAService.transferIn(userId, money);
         ExceptionUtils.addRuntimeException(50);
         bankBService.transferOut(userId, money);
     }
-
+    /**
+     * TCC 用例 -> 使用DTM事务验证成功场景
+     */
     @DTMTxBegin(appName = "transfer-tcc-success")
     public void transferTccLocalSuccess() {
         bankAService.tryTransferIn();
         bankBService.tryTransferOut();
     }
-
+    /**
+     * TCC 用例 -> 不使用DTM事务验证成功场景
+     */
     public void transferTccLocalSuccessUnable() {
         bankAService.tryTransferInUnable();
         bankBService.tryTransferOutUnable();
     }
-
+    /**
+     * TCC 用例 -> 使用DTM事务验证失败场景
+     */
     @DTMTxBegin(appName = "transfer-tcc-fail")
     public void transferTccLocalFail() {
         bankAService.tryTransferIn();
         bankBService.tryTransferOut();
         ExceptionUtils.addRuntimeException(100);
     }
-
+    /**
+     * TCC 用例 -> 不使用DTM事务验证失败场景
+     */
     public void transferTccLocalFailUnable() {
         bankAService.tryTransferInUnable();
         bankBService.tryTransferOutUnable();
         ExceptionUtils.addRuntimeException(100);
     }
-
+    /**
+     * 初始化数据库
+     */
     public void initBankAccount() {
         List<Integer> userIds = new ArrayList<>();
         for (int i = 0; i < ACCOUNT; i++) {
@@ -73,7 +87,9 @@ public class TransferService {
         bankBService.initUserAccount(userIds, INIT_MONEY);
         CmdUtils.println("Init bankA initB success");
     }
-
+    /**
+     * 查询 Bank A 和 Bank B 余额
+     */
     public void queryBankMoney() {
         CmdUtils.println("|--- userId ---|--- bankA-money ---|--- bankB-money ---|---- sum ----|");
         for (int i = 0; i < ACCOUNT; i++) {

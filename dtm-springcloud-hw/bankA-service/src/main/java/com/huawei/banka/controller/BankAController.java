@@ -26,7 +26,11 @@ public class BankAController {
 
     @Autowired
     private RestTemplate restTemplate;
-
+    /**
+     * bankA转入 同时调用 bankB转出
+     * @param id 账号
+     * @param money 钱数
+     */
     @GetMapping(value = "transfer")
     @DTMTxBegin(appName = "noninvasive-transfer")
     public String transfer(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money) {

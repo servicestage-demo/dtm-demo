@@ -20,7 +20,9 @@ public class BankBService extends AbsBankService {
     public void transferOut(int id, int money) {
         jdbcTemplate.update(DtmConst.TransferSql.TRANSFER_OUT_SQL, money, id);
     }
-
+    /**
+     * bankB 转入的TCC实现
+     */
     @DTMTccBranch(identifier = "tcc-try-transfer-out", confirmMethod = "confirm", cancelMethod = "cancel")
     public void tryTransferOut() {
         DTMContext dtmContext = DTMContext.getDTMContext();
