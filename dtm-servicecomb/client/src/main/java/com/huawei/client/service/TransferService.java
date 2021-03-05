@@ -45,16 +45,6 @@ public class TransferService {
             userIds + "", value + "", value + "", value + value + "");
     }
 
-    @DTMTxBegin(appName = "noninvasive-transfer-service")
-    public void transfer(int userId, int money) {
-        long globalTxId = DTMContext.getDTMContext().getGlobalTxId();
-        CmdUtils.println("run transfer service with user id: %s, globalTxId: %s",
-            userId + "", globalTxId + "");
-        bankAService.transferIn(userId, money);
-        ExceptionUtil.addRuntimeException(50);
-        bankBService.transferOut(userId, money);
-    }
-
     // @DTMTxBegin(appName = "noninvasive-transfer-service-select-for-update", timeout = 30000)
     public void queryAllMoneyWithTx() {
         queryMoney();
