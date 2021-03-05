@@ -1,19 +1,14 @@
-# 简介 
-dtm的demo集合，包括dtm demo、dtm springcloud Huawei 框架的demo、dtm servicecomb框架的demo
-
-# dtm-dubbo-servicecomb（更新中）
-dtm dubbo框架的demo，包含非侵入事务  
-样例指南见（链接）
+# Introduction 
+dtm demo，include dtm-origin, dtm-servicecomb, dtm-springcloud-hw
 
 # dtm-origin
-dtm原生demo，包含非侵入事务和TCC事务  
-样例指南见（链接）
+dtm origin demo, include noninvasive transaction and TCC transaction  
 
 # dtm-servicecomb
-dtm servicecomb框架的demo，包含非侵入事务  
-样例指南见（链接）
+dtm demo based on the ServiceComb, include noninvasive transaction  
 
 # dtm-springcloud-hw
-dtm springcloud-huawei框架的demo，包含非侵入事务  
-样例指南见（链接）
+dtm demo based on the springcloud-huawei, include noninvasive transaction  
 
+# dtm-dubbo-servicecomb（Updating）
+dtm demo based on the Dubbo, include noninvasive transaction
