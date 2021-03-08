@@ -31,12 +31,16 @@ public class BankBService extends AbsBankService {
 
     public void confirm() {
         DTMContext dtmContext = DTMContext.getDTMContext();
+        LOGGER.info("========================TCC confirm start========================");
         LOGGER.info("Tcc global-tx-id: {}, branch-tx-id: {} confirm transfer out", dtmContext.getGlobalTxId(), dtmContext.getBranchTxId());
+        LOGGER.info("========================TCC confirm end========================");
     }
 
     public void cancel() {
         DTMContext dtmContext = DTMContext.getDTMContext();
+        LOGGER.info("========================TCC cancel start========================");
         LOGGER.info("Tcc global-tx-id: {}, branch-tx-id: {} cancel transfer out", dtmContext.getGlobalTxId(), dtmContext.getBranchTxId());
+        LOGGER.info("========================TCC cancel end========================");
     }
 
     public void tryTransferOutUnable() {
