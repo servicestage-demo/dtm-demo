@@ -25,6 +25,7 @@
     </dependencies>
 
     <build>
+        <finalName>bank-a-service</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

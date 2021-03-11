@@ -26,6 +26,7 @@
     </dependencies>
 
     <build>
+        <finalName>dtm-origin-client</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
