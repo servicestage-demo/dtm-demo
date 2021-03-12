@@ -7,6 +7,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
@@ -18,6 +20,7 @@ public class ClientStarter implements ApplicationRunner {
     @Autowired
     private TransferService transferService;
 
+    private BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
     @Override
     public void run(ApplicationArguments args) throws Exception {
         Thread.sleep(8000);
@@ -62,8 +65,11 @@ public class ClientStarter implements ApplicationRunner {
     }
 
     private void doExecuteLocal() throws Exception {
-        int threadNum = 20;
-        int txNum = 50;
+        CmdUtils.println("请输入线程数量:事物数量:异常概率");
+        String input = console.readLine();
+        int threadNum = Integer.parseInt(input.split(":")[0]);
+        int txNum = Integer.parseInt(input.split(":")[1]);
+        int errRate = Integer.parseInt(input.split(":")[2]);
         Random random = new Random();
         CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         long beforeTime = System.currentTimeMillis();
@@ -72,7 +78,7 @@ public class ClientStarter implements ApplicationRunner {
                 for (int j = 0; j < txNum; j++) {
                     int money = 100;
                     try {
-                        transferService.transferLocal(random.nextInt() % 10, money);
+                        transferService.transferLocal(random.nextInt(10), money, errRate);
                     } catch (Exception e) {
                         // ignore
                     }
@@ -89,8 +95,11 @@ public class ClientStarter implements ApplicationRunner {
         transferService.queryBankMoney();
     }
     private void doExecuteLocalUnable() throws Exception {
-        int threadNum = 20;
-        int txNum = 50;
+        CmdUtils.println("请输入线程数量:事物数量:异常概率");
+        String input = console.readLine();
+        int threadNum = Integer.parseInt(input.split(":")[0]);
+        int txNum = Integer.parseInt(input.split(":")[1]);
+        int errRate = Integer.parseInt(input.split(":")[2]);
         Random random = new Random();
         CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         long beforeTime = System.currentTimeMillis();
@@ -99,7 +108,7 @@ public class ClientStarter implements ApplicationRunner {
                 for (int j = 0; j < txNum; j++) {
                     int money = 100;
                     try {
-                        transferService.transferLocalUnable(random.nextInt() % 10, money);
+                        transferService.transferLocalUnable(random.nextInt(10), money, errRate);
                     } catch (Exception e) {
                         // ignore
                     }

@@ -27,15 +27,6 @@ public class TransferService {
         this.bankBService = bankBService;
     }
     /**
-     * 非侵入用例 -> 使用DTM事务 微服务场景验证
-     */
-    @DTMTxBegin(appName = "transfer-local")
-    public void transferLocal(int userId, int money) {
-        bankAService.transferIn(userId, money);
-        ExceptionUtils.addRuntimeException(50);
-        bankBService.transferOut(userId, money);
-    }
-    /**
      * TCC 用例 -> 使用DTM事务验证成功场景
      */
     @DTMTxBegin(appName = "transfer-tcc-success")

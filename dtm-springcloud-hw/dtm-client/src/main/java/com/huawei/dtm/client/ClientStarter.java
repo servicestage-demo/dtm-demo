@@ -8,6 +8,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
@@ -16,8 +18,8 @@ import java.util.concurrent.CountDownLatch;
  */
 @Component
 public class ClientStarter implements ApplicationRunner {
-    private static final String BANKA_PATH = "http://dtm-banka/bank-a/transfer?id=%s&money=%s";
-
+    private static final String BANKA_PATH = "http://dtm-banka/bank-a/transfer?id=%s&money=%s&errRate=%s";
+    private BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
     @Autowired
     private TransferService transferService;
 
@@ -55,8 +57,11 @@ public class ClientStarter implements ApplicationRunner {
      * 微服务调用bankA转入、bankB转出
      */
     private void doExecuteMicro() throws Exception {
-        int threadNum = 10;
-        int txNum = 40;
+        CmdUtils.println("请输入线程数量:事物数量:异常概率");
+        String input = console.readLine();
+        int threadNum = Integer.parseInt(input.split(":")[0]);
+        int txNum = Integer.parseInt(input.split(":")[1]);
+        int errRate = Integer.parseInt(input.split(":")[2]);
         Random random = new Random();
         CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         long beforeTime = System.currentTimeMillis();
@@ -65,7 +70,7 @@ public class ClientStarter implements ApplicationRunner {
                 for (int j = 0; j < txNum; j++) {
                     int money = 100;
                     try {
-                        restTemplate.getForObject(String.format(BANKA_PATH, random.nextInt() % 10, money), String.class);
+                        restTemplate.getForObject(String.format(BANKA_PATH, random.nextInt(10), money, errRate), String.class);
                         Thread.sleep(100);
                     } catch (Exception e) {
                         // ignore

@@ -9,7 +9,6 @@ import com.huawei.common.error.ExceptionUtil;
 import com.huawei.middleware.dtm.client.annotations.DTMTxBegin;
 
 import com.netflix.config.DynamicIntProperty;
-import com.netflix.config.DynamicLongProperty;
 import com.netflix.config.DynamicPropertyFactory;
 
 import org.apache.servicecomb.provider.rest.common.RestSchema;
@@ -27,8 +26,6 @@ import javax.ws.rs.core.MediaType;
 @RequestMapping(path = "/bank", produces = MediaType.APPLICATION_JSON)
 public class BankBController {
     private final RestTemplate restInvoker = RestTemplateBuilder.create();
-
-    private static final String lbMvcDtmTransferPath = "cse://%s/bank/transfer?transferMoney=%s&id=%s";
 
     private final BankService bankBService;
 
@@ -49,8 +46,8 @@ public class BankBController {
      */
     @DTMTxBegin(appName = "noninvasive-cse-dtmProviderB-transferIn")
     @GetMapping(value = "/transfer")
-    public void dbtransfer(@RequestParam(name = "transferMoney") int transferMoney, @RequestParam(name = "id") int id) {
-        ExceptionUtil.addRuntimeException(errorRate.get());
+    public void dbtransfer(@RequestParam(name = "transferMoney") int transferMoney, @RequestParam(name = "id") int id, @RequestParam(name = "errRate") int errRate) {
+        ExceptionUtil.addRuntimeException(errRate);
         bankBService.transferOut(id, transferMoney);  //DtmProviderA
     }
 }

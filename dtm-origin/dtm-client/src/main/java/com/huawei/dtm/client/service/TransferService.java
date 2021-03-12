@@ -30,17 +30,17 @@ public class TransferService {
      * 非侵入用例 -> 使用DTM事务 本地场景验证
      */
     @DTMTxBegin(appName = "transfer-local")
-    public void transferLocal(int userId, int money) {
+    public void transferLocal(int userId, int money, int errRate) {
         bankAService.transferIn(userId, money);
-        ExceptionUtils.addRuntimeException(50);
+        ExceptionUtils.addRuntimeException(errRate);
         bankBService.transferOut(userId, money);
     }
     /**
      * 非侵入用例 -> 不使用DTM事务 本地场景验证
      */
-    public void transferLocalUnable(int userId, int money) {
+    public void transferLocalUnable(int userId, int money, int errRate) {
         bankAService.transferIn(userId, money);
-        ExceptionUtils.addRuntimeException(50);
+        ExceptionUtils.addRuntimeException(errRate);
         bankBService.transferOut(userId, money);
     }
     /**

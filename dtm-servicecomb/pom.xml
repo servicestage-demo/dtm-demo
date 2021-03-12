@@ -49,20 +49,18 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
-
-<dependency>
-    <groupId>org.apache.servicecomb</groupId>
-    <artifactId>solution-basic</artifactId>
-</dependency>
-<dependency>
-    <groupId>org.apache.servicecomb</groupId>
-    <artifactId>servicestage-environment</artifactId></dependency>
-	
+        <dependency>
+            <groupId>org.apache.servicecomb</groupId>
+            <artifactId>solution-basic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.servicecomb</groupId>
+            <artifactId>servicestage-environment</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.apache.servicecomb</groupId>
             <artifactId>dtm</artifactId>
         </dependency>
-
         <!--		DTM-->
         <dependency>
             <groupId>com.huawei.middleware.dtm</groupId>

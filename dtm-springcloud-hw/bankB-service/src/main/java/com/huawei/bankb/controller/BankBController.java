@@ -20,9 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class BankBController {
     private static final Logger LOGGER = LoggerFactory.getLogger(BankBController.class);
 
-    @Value("${dtm.err:50}")
-    private int errRate;
-
     @Value("${dtm.sleep:0}")
     private int sleepMs;
 
@@ -34,7 +31,7 @@ public class BankBController {
      * @param money 钱数
      */
     @GetMapping(value = "transfer")
-    public String transfer(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money) {
+    public String transfer(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money, @RequestParam(value = "errRate") int errRate) {
         LOGGER.info("global tx id:{}, transfer out", DTMContext.getDTMContext().getGlobalTxId());
         try {
             Thread.sleep(sleepMs);
@@ -51,8 +48,4 @@ public class BankBController {
         return sleepMs;
     }
 
-    @GetMapping(value = "/err-rate")
-    public int getErrRate() {
-        return errRate;
-    }
 }

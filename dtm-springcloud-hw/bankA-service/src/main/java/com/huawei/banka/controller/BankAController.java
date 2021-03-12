@@ -19,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
 public class BankAController {
     private static final Logger LOGGER = LoggerFactory.getLogger(BankAController.class);
 
-    private static final String BANKB_URL_PATH = "http://dtm-bankb/bank-b/transfer?id=%s&money=%s";
+    private static final String BANKB_URL_PATH = "http://dtm-bankb/bank-b/transfer?id=%s&money=%s&errRate=%s";
 
     @Autowired
     private BankAService bankAService;
@@ -33,10 +33,10 @@ public class BankAController {
      */
     @GetMapping(value = "transfer")
     @DTMTxBegin(appName = "noninvasive-transfer")
-    public String transfer(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money) {
+    public String transfer(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money, @RequestParam(value = "errRate") int errRate) {
         LOGGER.info("global tx id:{}, transfer in", DTMContext.getDTMContext().getGlobalTxId());
         bankAService.transferIn(id, money);
-        restTemplate.getForObject(String.format(BANKB_URL_PATH, id, money), String.class);
+        restTemplate.getForObject(String.format(BANKB_URL_PATH, id, money, errRate), String.class);
         return "ok";
     }
 }

@@ -25,7 +25,7 @@ import javax.ws.rs.core.MediaType;
 public class BankAController {
     private final RestTemplate restInvoker = RestTemplateBuilder.create();
 
-    private static final String lbMvcDtmTransferPath = "cse://%s/bank/transfer?transferMoney=%s&id=%s";
+    private static final String lbMvcDtmTransferPath = "cse://%s/bank/transfer?transferMoney=%s&id=%s&errRate=%s";
 
     private final BankService bankAService;
 
@@ -39,11 +39,11 @@ public class BankAController {
      */
     @DTMTxBegin(appName = "noninvasive-cse-dtmProviderA-transferIn")
     @GetMapping(value = "/transfer")
-    public void dbtransfer(@RequestParam(name = "transferMoney") int transferMoney, @RequestParam(name = "id") int id) {
+    public void dbtransfer(@RequestParam(name = "transferMoney") int transferMoney, @RequestParam(name = "id") int id, @RequestParam(name = "errRate") int errRate) {
         String dtmProviderB = "bank-b";
         bankAService.transferIn(id, transferMoney);  //DtmProviderA
         restInvoker.getForObject(
-            String.format(lbMvcDtmTransferPath, dtmProviderB, transferMoney, id),
+            String.format(lbMvcDtmTransferPath, dtmProviderB, transferMoney, id, errRate),
             String.class);
     }
 }
