@@ -1,7 +1,9 @@
 package com.huawei.dtm.client;
 
+import com.huawei.common.impl.BankAService;
 import com.huawei.dtm.client.service.TransferService;
 import com.huawei.dtm.client.utils.CmdUtils;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -20,6 +22,7 @@ import java.util.concurrent.CountDownLatch;
 public class ClientStarter implements ApplicationRunner {
     private static final String BANKA_PATH = "http://dtm-banka/bank-a/transfer?id=%s&money=%s&errRate=%s";
     private BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ClientStarter.class);
     @Autowired
     private TransferService transferService;
 
@@ -50,6 +53,7 @@ public class ClientStarter implements ApplicationRunner {
                 }
             } catch (Throwable throwable) {
                 // ignore
+                LOGGER.error(throwable.getMessage());
             }
         }
     }
@@ -57,11 +61,20 @@ public class ClientStarter implements ApplicationRunner {
      * 微服务调用bankA转入、bankB转出
      */
     private void doExecuteMicro() throws Exception {
-        CmdUtils.println("请输入线程数量:事物数量:异常概率");
+        CmdUtils.println("请输入线程数量:单线程事物数量:异常概率");
         String input = console.readLine();
         int threadNum = Integer.parseInt(input.split(":")[0]);
         int txNum = Integer.parseInt(input.split(":")[1]);
         int errRate = Integer.parseInt(input.split(":")[2]);
+        if(threadNum < 1 || threadNum > 20){
+            throw new IllegalArgumentException("线程数量取值范围为1到20的整数");
+        }
+        if(txNum < 1 || txNum > 100){
+            throw new IllegalArgumentException("单线程事物数量取值范围为1到100的整数");
+        }
+        if(errRate < 0 || errRate > 100){
+            throw new IllegalArgumentException("异常概率取值范围为0到100的整数");
+        }
         Random random = new Random();
         CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         long beforeTime = System.currentTimeMillis();

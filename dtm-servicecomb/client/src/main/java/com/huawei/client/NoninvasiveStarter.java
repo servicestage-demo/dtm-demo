@@ -8,6 +8,7 @@ import com.huawei.client.service.TransferService;
 import com.huawei.common.util.CmdUtils;
 
 import org.apache.servicecomb.provider.springmvc.reference.RestTemplateBuilder;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -26,7 +27,7 @@ public class NoninvasiveStarter {
     private BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
     @Autowired
     private TransferService service;
-
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(NoninvasiveStarter.class);
     private final RestTemplate restInvoker = RestTemplateBuilder.create();
 
     public void start() throws Exception {
@@ -59,11 +60,20 @@ public class NoninvasiveStarter {
      * 微服务调用bankA转入、bankB转出
      */
     private void doExecuteDemo() throws Exception {
-        CmdUtils.println("请输入线程数量:事物数量:异常概率");
+        CmdUtils.println("请输入线程数量:单线程事物数量:异常概率");
         String input = console.readLine();
         int threadNum = Integer.parseInt(input.split(":")[0]);
         int txNum = Integer.parseInt(input.split(":")[1]);
         int errRate = Integer.parseInt(input.split(":")[2]);
+        if(threadNum < 1 || threadNum > 20){
+            throw new IllegalArgumentException("线程数量取值范围为1到20的整数");
+        }
+        if(txNum < 1 || txNum > 100){
+            throw new IllegalArgumentException("单线程事物数量取值范围为1到100的整数");
+        }
+        if(errRate < 0 || errRate > 100){
+            throw new IllegalArgumentException("异常概率取值范围为0到100的整数");
+        }
         Random random = new Random();
         CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         long beforeTime = System.currentTimeMillis();
