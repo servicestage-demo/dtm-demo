@@ -18,6 +18,7 @@ public class BankAService extends AbsBankService {
     }
 
     public void transferIn(int id, int money) {
+        LOGGER.info("BankA transfer in");
         jdbcTemplate.update(DtmConst.TransferSql.TRANSFER_IN_SQL, money, id);
     }
     /**
