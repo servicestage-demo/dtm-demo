@@ -44,10 +44,12 @@ public class BankService {
     }
 
     public void transferOut(int id, int money) {
+        LOGGER.info("BankB transfer out");
         jdbcTemplate.update("UPDATE account SET money= money - ? WHERE id = ?;", money, id);
     }
 
     public void transferIn(int id, int money) {
+        LOGGER.info("BankA transfer in");
         jdbcTemplate.update("UPDATE account SET money=money+? WHERE id=?;", money, id);
     }
 }
