@@ -66,7 +66,7 @@ public class ClientStarter implements ApplicationRunner {
     }
 
     private void doExecuteLocal() throws Exception {
-        CmdUtils.println("请输入线程数量:单线程事物数量:异常概率");
+        CmdUtils.println("请输入线程数量:单线程事务数量:异常概率");
         String input = console.readLine();
         int threadNum = Integer.parseInt(input.split(":")[0]);
         int txNum = Integer.parseInt(input.split(":")[1]);
@@ -75,7 +75,7 @@ public class ClientStarter implements ApplicationRunner {
             throw new IllegalArgumentException("线程数量取值范围为1到20的整数");
         }
         if(txNum < 1 || txNum > 100){
-            throw new IllegalArgumentException("单线程事物数量取值范围为1到100的整数");
+            throw new IllegalArgumentException("单线程事务数量取值范围为1到100的整数");
         }
         if(errRate < 0 || errRate > 100){
             throw new IllegalArgumentException("异常概率取值范围为0到100的整数");
@@ -105,7 +105,7 @@ public class ClientStarter implements ApplicationRunner {
         transferService.queryBankMoney();
     }
     private void doExecuteLocalUnable() throws Exception {
-        CmdUtils.println("请输入线程数量:单线程事物数量:异常概率");
+        CmdUtils.println("请输入线程数量:单线程事务数量:异常概率");
         String input = console.readLine();
         int threadNum = Integer.parseInt(input.split(":")[0]);
         int txNum = Integer.parseInt(input.split(":")[1]);
@@ -114,7 +114,7 @@ public class ClientStarter implements ApplicationRunner {
             throw new IllegalArgumentException("线程数量取值范围为1到20的整数");
         }
         if(txNum < 1 || txNum > 100){
-            throw new IllegalArgumentException("单线程事物数量取值范围为1到100的整数");
+            throw new IllegalArgumentException("单线程事务数量取值范围为1到100的整数");
         }
         if(errRate < 0 || errRate > 100){
             throw new IllegalArgumentException("异常概率取值范围为0到100的整数");
