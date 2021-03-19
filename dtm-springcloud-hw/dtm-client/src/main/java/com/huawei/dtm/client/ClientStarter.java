@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 /**
  * 程序的入口，根据输入分别去调用不同的场景用例
  */
@@ -79,6 +80,7 @@ public class ClientStarter implements ApplicationRunner {
         CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         long beforeTime = System.currentTimeMillis();
         for (int i = 0; i < threadNum; i++) {
+            TimeUnit.MILLISECONDS.sleep(500);
             new Thread(() -> {
                 for (int j = 0; j < txNum; j++) {
                     int money = 100;
