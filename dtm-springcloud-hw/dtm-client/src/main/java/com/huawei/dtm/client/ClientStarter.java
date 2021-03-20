@@ -66,11 +66,11 @@ public class ClientStarter implements ApplicationRunner {
         int threadNum = Integer.parseInt(input.split(":")[0]);
         int txNum = Integer.parseInt(input.split(":")[1]);
         int errRate = Integer.parseInt(input.split(":")[2]);
-        if(threadNum < 1 || threadNum > 12){
-            throw new IllegalArgumentException("线程数量取值范围为1到12的整数");
+        if(threadNum < 1 || threadNum > 10){
+            throw new IllegalArgumentException("线程数量取值范围为1到10的整数");
         }
-        if(txNum < 1 || txNum > 100){
-            throw new IllegalArgumentException("单线程事务数量取值范围为1到100的整数");
+        if(txNum < 1 || txNum > 50){
+            throw new IllegalArgumentException("单线程事务数量取值范围为1到50的整数");
         }
         if(errRate < 0 || errRate > 100){
             throw new IllegalArgumentException("异常概率取值范围为0到100的整数");
@@ -79,7 +79,7 @@ public class ClientStarter implements ApplicationRunner {
         CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         long beforeTime = System.currentTimeMillis();
         for (int i = 0; i < threadNum; i++) {
-            Thread.sleep(600);
+            Thread.sleep(1000);
             new Thread(() -> {
                 for (int j = 0; j < txNum; j++) {
                     int money = 100;
