@@ -4,6 +4,8 @@
 
 package com.huawei.common;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
@@ -13,7 +15,7 @@ import javax.sql.DataSource;
 
 public class BankService {
     protected JdbcTemplate jdbcTemplate;
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(BankService.class);
     protected DataSource dataSource;
 
     public BankService(JdbcTemplate jdbcTemplate, DataSource dataSource) {
