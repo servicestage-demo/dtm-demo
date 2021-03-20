@@ -71,8 +71,8 @@ public class ClientStarter implements ApplicationRunner {
         int threadNum = Integer.parseInt(input.split(":")[0]);
         int txNum = Integer.parseInt(input.split(":")[1]);
         int errRate = Integer.parseInt(input.split(":")[2]);
-        if(threadNum < 1 || threadNum > 15){
-            throw new IllegalArgumentException("线程数量取值范围为1到15的整数");
+        if(threadNum < 1 || threadNum > 12){
+            throw new IllegalArgumentException("线程数量取值范围为1到12的整数");
         }
         if(txNum < 1 || txNum > 100){
             throw new IllegalArgumentException("单线程事务数量取值范围为1到100的整数");
@@ -111,8 +111,8 @@ public class ClientStarter implements ApplicationRunner {
         int threadNum = Integer.parseInt(input.split(":")[0]);
         int txNum = Integer.parseInt(input.split(":")[1]);
         int errRate = Integer.parseInt(input.split(":")[2]);
-        if(threadNum < 1 || threadNum > 15){
-            throw new IllegalArgumentException("线程数量取值范围为1到15的整数");
+        if(threadNum < 1 || threadNum > 12){
+            throw new IllegalArgumentException("线程数量取值范围为1到12的整数");
         }
         if(txNum < 1 || txNum > 100){
             throw new IllegalArgumentException("单线程事务数量取值范围为1到100的整数");
