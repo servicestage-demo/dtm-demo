@@ -65,8 +65,8 @@ public class NoninvasiveStarter {
         int threadNum = Integer.parseInt(input.split(":")[0]);
         int txNum = Integer.parseInt(input.split(":")[1]);
         int errRate = Integer.parseInt(input.split(":")[2]);
-        if(threadNum < 1 || threadNum > 20){
-            throw new IllegalArgumentException("线程数量取值范围为1到20的整数");
+        if(threadNum < 1 || threadNum > 15){
+            throw new IllegalArgumentException("线程数量取值范围为1到15的整数");
         }
         if(txNum < 1 || txNum > 100){
             throw new IllegalArgumentException("单线程事务数量取值范围为1到100的整数");
@@ -78,7 +78,7 @@ public class NoninvasiveStarter {
         CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         long beforeTime = System.currentTimeMillis();
         for (int i = 0; i < threadNum; i++) {
-            Thread.sleep(10);
+            Thread.sleep(600);
             new Thread(() -> {
                 for (int j = 0; j < txNum; j++) {
                     int money = 100;
