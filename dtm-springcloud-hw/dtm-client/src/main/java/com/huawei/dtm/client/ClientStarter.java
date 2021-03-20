@@ -79,7 +79,7 @@ public class ClientStarter implements ApplicationRunner {
         CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         long beforeTime = System.currentTimeMillis();
         for (int i = 0; i < threadNum; i++) {
-            TimeUnit.MILLISECONDS.sleep(500);
+            Thread.sleep(600);
             new Thread(() -> {
                 for (int j = 0; j < txNum; j++) {
                     int money = 100;
