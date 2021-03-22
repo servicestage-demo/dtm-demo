@@ -18,7 +18,7 @@ public class TransferService {
 
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(TransferService.class);
 
-    private static final int ACCOUNT = 300;
+    private static final int ACCOUNT = 500;
 
     public static final int INIT_MONEY = 1000000;
 
@@ -30,6 +30,7 @@ public class TransferService {
         this.bankAService = bankAService;
         this.bankBService = bankBService;
     }
+
     /**
      * 非侵入用例 -> 使用DTM事务 本地场景验证
      */
@@ -39,6 +40,7 @@ public class TransferService {
         ExceptionUtils.addRuntimeException(errRate);
         bankBService.transferOut(userId, money);
     }
+
     /**
      * 非侵入用例 -> 不使用DTM事务 本地场景验证
      */
@@ -47,6 +49,7 @@ public class TransferService {
         ExceptionUtils.addRuntimeException(errRate);
         bankBService.transferOut(userId, money);
     }
+
     /**
      * TCC 用例 -> 使用DTM事务验证成功场景
      */
@@ -55,6 +58,7 @@ public class TransferService {
         bankAService.tryTransferIn();
         bankBService.tryTransferOut();
     }
+
     /**
      * TCC 用例 -> 不使用DTM事务验证成功场景
      */
@@ -62,6 +66,7 @@ public class TransferService {
         bankAService.tryTransferInUnable();
         bankBService.tryTransferOutUnable();
     }
+
     /**
      * TCC 用例 -> 使用DTM事务验证失败场景
      */
@@ -71,6 +76,7 @@ public class TransferService {
         bankBService.tryTransferOut();
         ExceptionUtils.addRuntimeException(100);
     }
+
     /**
      * TCC 用例 -> 不使用DTM事务验证失败场景
      */
@@ -79,6 +85,7 @@ public class TransferService {
         bankBService.tryTransferOutUnable();
         ExceptionUtils.addRuntimeException(100);
     }
+
     /**
      * 初始化数据库
      */
@@ -91,6 +98,7 @@ public class TransferService {
         bankBService.initUserAccount(userIds, INIT_MONEY);
         LOGGER.info("Init bankA initB success");
     }
+
     /**
      * 查询 Bank A 和 Bank B 余额
      */
