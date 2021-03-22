@@ -5,10 +5,9 @@
 package com.huawei.client.service;
 
 import com.huawei.common.BankService;
-import com.huawei.common.error.ExceptionUtil;
 import com.huawei.common.util.CmdUtils;
-import com.huawei.middleware.dtm.client.annotations.DTMTxBegin;
-import com.huawei.middleware.dtm.client.context.DTMContext;
+
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.List;
 public class TransferService {
     private static final String PRINT_TMPL = "|%14s|%19s|%19s|%13s|";
 
-    public static final int ACCOUNT_NUMBER = 10;
+    public static final int ACCOUNT_NUMBER = 500;
 
     public static int initialAccountMoney = 1000000;
 
@@ -24,11 +23,14 @@ public class TransferService {
 
     private BankService bankBService;
 
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(TransferService.class);
+
     public TransferService(BankService bankAService, BankService bankBService
     ) {
         this.bankAService = bankAService;
         this.bankBService = bankBService;
     }
+
     /**
      * 初始化数据库
      */
@@ -49,6 +51,7 @@ public class TransferService {
     public void queryAllMoneyWithTx() {
         queryMoney();
     }
+
     /**
      * 查询bankA和bankB余额
      */
@@ -61,10 +64,13 @@ public class TransferService {
             if (total != 2 * initialAccountMoney) {
                 CmdUtils.println("account of userId:%s error. bankA:%s, bankB:%s, total:%s ",
                     id + "", bankA + "", bankB + "", total + "");
-            }
-            else {
+            } else {
                 CmdUtils.println(PRINT_TMPL, id + "", bankA + "", bankB + "", total + "");
             }
         }
+        long totalA = bankAService.queryAccountMoneySum();
+        long totalB = bankBService.queryAccountMoneySum();
+        long total = totalA + totalB;
+        LOGGER.info("Run finish. total a {},total b {},sum {}", totalA, totalB, total);
     }
 }
