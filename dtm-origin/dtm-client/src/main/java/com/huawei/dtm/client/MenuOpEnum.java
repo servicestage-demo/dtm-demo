@@ -17,7 +17,6 @@ public enum MenuOpEnum {
         this.des = des;
     }
 
-
     @Override
     public String toString() {
         return String.format("[%s] %s;", ordinal(), this.des);
