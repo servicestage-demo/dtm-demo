@@ -60,7 +60,7 @@ public class TransferService {
         }
         bankAService.initUserAccount(userIds, INIT_MONEY);
         bankBService.initUserAccount(userIds, INIT_MONEY);
-        CmdUtils.println("Init bankA initB success");
+        LOGGER.info("Init bankA bankB success");
     }
 
     /**
