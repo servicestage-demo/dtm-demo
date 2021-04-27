@@ -1,0 +1,17 @@
+server:
+  port: 8029
+
+spring:
+  application:
+    name: dtm-bankcenter
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    servicecomb:
+      discovery:
+        version: 1.0.0
+        enabled: true
+        address: http://${cse_ip}:30100
+        watch: false
+        app-name: dtm-demo
+        service-name: ${spring.application.name}

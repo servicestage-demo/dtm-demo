@@ -1,7 +1,6 @@
 package com.huawei.banka.controller;
 
 import com.huawei.common.impl.BankAService;
-import com.huawei.middleware.dtm.client.annotations.DTMTxBegin;
 import com.huawei.middleware.dtm.client.context.DTMContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RefreshScope
@@ -19,24 +17,40 @@ import org.springframework.web.client.RestTemplate;
 public class BankAController {
     private static final Logger LOGGER = LoggerFactory.getLogger(BankAController.class);
 
-    private static final String BANKB_URL_PATH = "http://dtm-bankb/bank-b/transfer?id=%s&money=%s&errRate=%s";
-
     @Autowired
     private BankAService bankAService;
 
-    @Autowired
-    private RestTemplate restTemplate;
     /**
-     * bankA转入 同时调用 bankB转出
+     * bankA转入
      * @param id 账号
      * @param money 钱数
      */
     @GetMapping(value = "transfer")
-    @DTMTxBegin(appName = "noninvasive-transfer")
     public String transfer(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money, @RequestParam(value = "errRate") int errRate) {
         LOGGER.info("global tx id:{}, transfer in", DTMContext.getDTMContext().getGlobalTxId());
         bankAService.transferIn(id, money);
-        restTemplate.getForObject(String.format(BANKB_URL_PATH, id, money, errRate), String.class);
         return "ok";
+    }
+
+    /**
+     * bankA 初始化
+     * @param userIds 账号
+     * @param money 钱数
+     */
+    @GetMapping(value = "init")
+    public String init(@RequestParam(value = "userIds") int userIds, @RequestParam(value = "money") int money) {
+        LOGGER.info("bankA init");
+        bankAService.initUserAccount(userIds, money);
+        return "ok";
+    }
+
+    /**
+     * bankA 查询
+     * @param id 账号
+     * @return
+     */
+    @GetMapping(value = "query")
+    public long query(@RequestParam(value = "id") int id) {
+        return bankAService.queryMoneyById(id);
     }
 }

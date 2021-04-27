@@ -1,6 +1,5 @@
 package com.huawei.bankb.controller;
 
-import com.huawei.common.impl.BankAService;
 import com.huawei.common.impl.BankBService;
 import com.huawei.common.util.ExceptionUtils;
 import com.huawei.middleware.dtm.client.context.DTMContext;
@@ -25,6 +24,7 @@ public class BankBController {
 
     @Autowired
     private BankBService bankBService;
+
     /**
      * 概率抛出异常 同时 bankB转出
      * @param id 账号
@@ -42,6 +42,30 @@ public class BankBController {
         bankBService.transferOut(id, money);
         return "ok";
     }
+
+    /**
+     * bankB 初始化
+     * @param userIds 账号
+     * @param money 钱数
+     */
+    @GetMapping(value = "init")
+    public String init(@RequestParam(value = "userIds") int userIds, @RequestParam(value = "money") int money) {
+        LOGGER.info("bankB init");
+        bankBService.initUserAccount(userIds, money);
+        return "ok";
+    }
+
+    /**
+     * bankB 查询
+     * @param id 账号
+     * @return
+     */
+    @GetMapping(value = "query")
+    public long query(@RequestParam(value = "id") int id) {
+        return bankBService.queryMoneyById(id);
+    }
+
+
 
     @GetMapping(value = "/sleep")
     public int getSleepMs() {
