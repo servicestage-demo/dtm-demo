@@ -60,12 +60,19 @@ public class BankBController {
      * @param id 账号
      * @return
      */
-    @GetMapping(value = "query")
-    public long query(@RequestParam(value = "id") int id) {
+    @GetMapping(value = "queryByID")
+    public long queryByID(@RequestParam(value = "id") int id) {
         return bankBService.queryMoneyById(id);
     }
 
-
+    /**
+     * bankB 查询
+     * @return
+     */
+    @GetMapping(value = "query")
+    public long query() {
+        return bankBService.querySumMoney();
+    }
 
     @GetMapping(value = "/sleep")
     public int getSleepMs() {

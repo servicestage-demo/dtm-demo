@@ -26,7 +26,7 @@ public class BankAController {
      * @param money 钱数
      */
     @GetMapping(value = "transfer")
-    public String transfer(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money, @RequestParam(value = "errRate") int errRate) {
+    public String transfer(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money) {
         LOGGER.info("global tx id:{}, transfer in", DTMContext.getDTMContext().getGlobalTxId());
         bankAService.transferIn(id, money);
         return "ok";
@@ -49,8 +49,17 @@ public class BankAController {
      * @param id 账号
      * @return
      */
-    @GetMapping(value = "query")
-    public long query(@RequestParam(value = "id") int id) {
+    @GetMapping(value = "queryByID")
+    public long queryByID(@RequestParam(value = "id") int id) {
         return bankAService.queryMoneyById(id);
+    }
+
+    /**
+     * bankA 查询
+     * @return
+     */
+    @GetMapping(value = "query")
+    public long query() {
+        return bankAService.querySumMoney();
     }
 }

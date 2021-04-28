@@ -17,13 +17,15 @@ import org.springframework.web.client.RestTemplate;
 public class BankCenterController {
     private static final Logger LOGGER = LoggerFactory.getLogger(BankCenterController.class);
 
-    private static final String BANKA_TRANSFER = "http://dtm-banka/bank-a/transfer?id=%s&money=%s&errRate=%s";
+    private static final String BANKA_TRANSFER = "http://dtm-banka/bank-a/transfer?id=%s&money=%s";
     private static final String BANKA_INIT = "http://dtm-banka/bank-a/init?userIds=%s&money=%s";
-    private static final String BANKA_QUERY = "http://dtm-banka/bank-a/query?id=%s";
+    private static final String BANKA_QUERYBYID = "http://dtm-banka/bank-a/queryByID?id=%s";
+    private static final String BANKA_QUERY = "http://dtm-banka/bank-a/query";
 
     private static final String BANKB_TRANSFER = "http://dtm-bankb/bank-b/transfer?id=%s&money=%s&errRate=%s";
     private static final String BANKB_INIT = "http://dtm-bankb/bank-b/init?userIds=%s&money=%s";
-    private static final String BANKB_QUERY = "http://dtm-bankb/bank-b/query?id=%s";
+    private static final String BANKB_QUERYBYID = "http://dtm-bankb/bank-b/queryByID?id=%s";
+    private static final String BANKB_QUERY = "http://dtm-bankb/bank-b/query";
 
     @Autowired
     private RestTemplate restTemplate;
@@ -38,12 +40,8 @@ public class BankCenterController {
     @DTMTxBegin(appName = "noninvasive-transfer")
     public String transfer(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money, @RequestParam(value = "errRate") int errRate) {
         LOGGER.info("Bank-center start invoke bankA and bankB");
-        restTemplate.getForObject(
-                String.format(BANKA_TRANSFER, id, money, errRate),
-                String.class);
-        restTemplate.getForObject(
-                String.format(BANKB_TRANSFER, id, money, errRate),
-                String.class);
+        restTemplate.getForObject(String.format(BANKA_TRANSFER, id, money), String.class);
+        restTemplate.getForObject(String.format(BANKB_TRANSFER, id, money, errRate), String.class);
         return "ok";
     }
 
@@ -55,32 +53,46 @@ public class BankCenterController {
     @GetMapping(value = "init")
     public String init(@RequestParam(value = "userIds") int userIds, @RequestParam(value = "money") int money) {
         LOGGER.info("Bank-center init bankA and bankB");
-        restTemplate.getForObject(
-                String.format(BANKA_INIT, userIds, money),
-                String.class);
-        restTemplate.getForObject(
-                String.format(BANKB_INIT, userIds, money),
-                String.class);
+        restTemplate.getForObject(String.format(BANKA_INIT, userIds, money), String.class);
+        restTemplate.getForObject(String.format(BANKB_INIT, userIds, money), String.class);
         return "ok";
     }
 
     /**
-     * 查询 bankA 余额
+     * 根据 id 查询 bankA 余额
      * @param id 账号
      */
     @GetMapping(value = "queryAById")
     public long queryAById(@RequestParam(value = "id") int id) {
-        LOGGER.info("Bank-center start query bankA and bankB");
-        return restTemplate.getForObject(String.format(BANKA_QUERY, id), Long.class);
+        LOGGER.info("Bank-center query bankA id {}", id);
+        return restTemplate.getForObject(String.format(BANKA_QUERYBYID, id), Long.class);
     }
 
     /**
-     * 查询 bankB 余额
+     * 根据 id 查询 bankB 余额
      * @param id 账号
      */
     @GetMapping(value = "queryBById")
     public long queryBById(@RequestParam(value = "id") int id) {
-        LOGGER.info("Bank-center start query bankA and bankB");
-        return restTemplate.getForObject(String.format(BANKB_QUERY, id), Long.class);
+        LOGGER.info("Bank-center query bankB id {}", id);
+        return restTemplate.getForObject(String.format(BANKB_QUERYBYID, id), Long.class);
+    }
+
+    /**
+     * 查询 bankA 余额
+     */
+    @GetMapping(value = "queryA")
+    public long queryA() {
+        LOGGER.info("Bank-center query bankA");
+        return restTemplate.getForObject(String.format(BANKA_QUERY), Long.class);
+    }
+
+    /**
+     * 查询 bankB 余额
+     */
+    @GetMapping(value = "queryB")
+    public long queryB() {
+        LOGGER.info("Bank-center query bankB");
+        return restTemplate.getForObject(String.format(BANKB_QUERY), Long.class);
     }
 }

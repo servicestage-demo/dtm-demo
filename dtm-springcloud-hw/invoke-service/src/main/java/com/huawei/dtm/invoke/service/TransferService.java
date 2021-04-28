@@ -1,7 +1,5 @@
 package com.huawei.dtm.invoke.service;
 
-import com.huawei.common.impl.BankAService;
-import com.huawei.common.impl.BankBService;
 import com.huawei.dtm.invoke.utils.CmdUtils;
 
 import org.slf4j.LoggerFactory;
@@ -11,7 +9,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
@@ -27,24 +24,18 @@ public class TransferService {
 
     private static final String CENTER_TRANSFER = "http://dtm-bankcenter/bank-center/transfer?id=%s&money=%s&errRate=%s";
     private static final String CENTER_INIT = "http://dtm-bankcenter/bank-center/init?userIds=%s&money=%s";
-    private static final String CENTER_QUERYA = "http://dtm-bankcenter/bank-center/queryAById?id=%s";
-    private static final String CENTER_QUERYB = "http://dtm-bankcenter/bank-center/queryBById?id=%s";
+    private static final String CENTER_QUERYABYID = "http://dtm-bankcenter/bank-center/queryAById?id=%s";
+    private static final String CENTER_QUERYBBYID = "http://dtm-bankcenter/bank-center/queryBById?id=%s";
+
+    private static final String CENTER_QUERYA = "http://dtm-bankcenter/bank-center/queryA";
+    private static final String CENTER_QUERYB = "http://dtm-bankcenter/bank-center/queryB";
 
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(TransferService.class);
-
-    private BankAService bankAService;
-
-    private BankBService bankBService;
 
     private BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 
     @Autowired
     private RestTemplate restTemplate;
-
-    public TransferService(BankAService bankAService, BankBService bankBService) {
-        this.bankAService = bankAService;
-        this.bankBService = bankBService;
-    }
 
     /**
      * 微服务调用bankA转入、bankB转出
@@ -86,7 +77,7 @@ public class TransferService {
             // ignore
         }
         CmdUtils.println("total cost: %s ms", System.currentTimeMillis() - beforeTime + "");
-//        queryBankMoney();
+        queryBankMoney();
     }
 
     /**
@@ -103,8 +94,8 @@ public class TransferService {
     public void queryBankMoney() {
         CmdUtils.println("|--- userId ---|--- bankA-money ---|--- bankB-money ---|---- sum ----|");
         for (int i = 0; i < ACCOUNT; i++) {
-            long bankA = restTemplate.getForObject(String.format(CENTER_QUERYA, i), Long.class);
-            long bankB = restTemplate.getForObject(String.format(CENTER_QUERYB, i), Long.class);
+            long bankA = restTemplate.getForObject(String.format(CENTER_QUERYABYID, i), Long.class);
+            long bankB = restTemplate.getForObject(String.format(CENTER_QUERYBBYID, i), Long.class);
             long total = bankA + bankB;
             if (total != INIT_MONEY * 2) {
                 CmdUtils.println("[ERROR] user id： %s, bankA: %s, bankB: %s, total: %s",
@@ -113,8 +104,8 @@ public class TransferService {
                 CmdUtils.println(PRINT_TMPL, i + "", bankA + "", bankB + "", total + "");
             }
         }
-        long totalA = bankAService.querySumMoney();
-        long totalB = bankBService.querySumMoney();
+        long totalA = restTemplate.getForObject(String.format(CENTER_QUERYA), Long.class);
+        long totalB = restTemplate.getForObject(String.format(CENTER_QUERYB), Long.class);
         long total = totalA + totalB;
         LOGGER.info("Run finish. total a {},total b {},sum {}", totalA, totalB, total);
     }

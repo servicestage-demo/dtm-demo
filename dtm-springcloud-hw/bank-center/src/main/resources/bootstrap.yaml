@@ -11,7 +11,7 @@ spring:
       discovery:
         version: 1.0.0
         enabled: true
-        address: http://${cse_ip}:30100
+        address: ${cse_address}
         watch: false
         app-name: dtm-demo
         service-name: ${spring.application.name}

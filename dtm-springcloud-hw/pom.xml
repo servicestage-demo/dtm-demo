@@ -20,7 +20,7 @@
         <sch.version>1.5.1-Hoxton</sch.version>
         <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
         <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
-        <dtm.version>2.2.20</dtm.version>
+        <dtm.version>3.0.0</dtm.version>
         <mysql.version>8.0.16</mysql.version>
     </properties>
 
@@ -81,12 +81,6 @@
             <groupId>com.huaweicloud</groupId>
             <artifactId>spring-cloud-starter-huawei-router</artifactId>
             <version>${sch.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.log4j</groupId>
-                    <artifactId>log4j-slf4j-impl</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -98,12 +92,6 @@
             <groupId>com.huawei.middleware.dtm</groupId>
             <artifactId>dtm-client-all</artifactId>
             <version>${dtm.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.logging.log4j</groupId>
-                    <artifactId>log4j-slf4j-impl</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
     </dependencies>
