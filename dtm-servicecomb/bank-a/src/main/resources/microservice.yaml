@@ -11,7 +11,7 @@ servicecomb:
   release_way: canary  #新版本灰度开关
   service:
     registry:
-      address: http://${cse_ip}:30100                #本地中心
+      address: ${cse_address}                #本地中心
       instance:
         watch: false
         pull:

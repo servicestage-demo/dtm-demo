@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
-    <artifactId>client</artifactId>
+    <artifactId>bank-center</artifactId>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
@@ -22,7 +22,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>client</finalName>
+        <finalName>bank-center-service</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -49,5 +49,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

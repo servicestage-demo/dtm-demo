@@ -1,7 +1,7 @@
-port: 1113
+port: 1110
 APPLICATION_ID: dtm
 service_description:
-  name: bank-b
+  name: bank-center
   version: 1.0.1
   environment: development
 servicecomb:
@@ -11,7 +11,7 @@ servicecomb:
   release_way: canary  #新版本灰度开关
   service:
     registry:
-      address: ${cse_address}                 #本地中心
+      address: ${cse_address}               #本地中心
       instance:
         watch: false
         pull:
@@ -27,9 +27,3 @@ servicecomb:
 spring:
   main:
     allow-bean-definition-overriding: true
-  datasource:
-    bankb:
-      username: ${db_user_name}
-      password: ${db_user_pwd}
-      url: jdbc:mysql://${db_ip}:3306/bankb?verifyServerCertificate=false&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-      driver-class-name: com.mysql.cj.jdbc.Driver

@@ -9,8 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
-import java.util.List;
-
 import javax.sql.DataSource;
 
 public class BankService {
@@ -23,13 +21,13 @@ public class BankService {
         this.dataSource = dataSource;
     }
 
-    public void initAllAccount(List<Integer> userIds, int total) {
+    public void initAllAccount(int userIds, int total) {
         jdbcTemplate.execute(
             "CREATE TABLE IF NOT EXISTS account (id INTEGER,type INTEGER, money INTEGER, primary key (id,type),check "
                 + "(money>0));");
         jdbcTemplate.execute("truncate table account;");
-        for (int userId : userIds) {
-            jdbcTemplate.update("INSERT into account values(?,0,?);", userId, total);
+        for (int i = 0 ; i < userIds; i++) {
+            jdbcTemplate.update("INSERT into account values(?,0,?);", i, total);
         }
     }
 
