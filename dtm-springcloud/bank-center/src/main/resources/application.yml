@@ -1,0 +1,15 @@
+server:
+  port: 8381
+dtm:
+  use-feign: true
+spring:
+  application:
+    name: dtm-bankcenter
+  main:
+    allow-bean-definition-overriding: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+  instance:
+    prefer-ip-address: true
