@@ -21,7 +21,7 @@
         <springboot-version>2.3.10.RELEASE</springboot-version>
         <spring-cloud.version>Hoxton.SR11</spring-cloud.version>
         <spring-boot.version>2.3.10.RELEASE</spring-boot.version>
-        <dtm.version>3.0.0.RC2</dtm.version>
+        <dtm.version>3.0.2</dtm.version>
     </properties>
 
     <modules>

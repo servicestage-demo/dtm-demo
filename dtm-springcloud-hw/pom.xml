@@ -20,7 +20,7 @@
         <sch.version>1.5.1-Hoxton</sch.version>
         <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
         <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
-        <dtm.version>3.0.0</dtm.version>
+        <dtm.version>3.0.2</dtm.version>
         <mysql.version>8.0.16</mysql.version>
     </properties>
 
@@ -69,11 +69,6 @@
         </dependency>
         <dependency>
             <groupId>com.huaweicloud</groupId>
-            <artifactId>spring-cloud-starter-huawei-dtm</artifactId>
-            <version>${sch.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.huaweicloud</groupId>
             <artifactId>spring-cloud-starter-huawei-servicecomb-discovery</artifactId>
             <version>${sch.version}</version>
         </dependency>
@@ -90,10 +85,14 @@
         <!--        DTM       -->
         <dependency>
             <groupId>com.huawei.middleware.dtm</groupId>
-            <artifactId>dtm-client-all</artifactId>
+            <artifactId>dtm-springcloud-feign-starter</artifactId>
             <version>${dtm.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.huawei.middleware.dtm</groupId>
+            <artifactId>dtm-springcloud-rest-starter</artifactId>
+            <version>${dtm.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
