@@ -19,7 +19,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <servicecomb.version>2.2.0</servicecomb.version>
-        <dtm.version>3.0.0</dtm.version>
+        <dtm.version>3.0.2</dtm.version>
         <mysql.version>8.0.16</mysql.version>
     </properties>
 
@@ -34,7 +34,7 @@
             </dependency>
             <dependency>
                 <groupId>com.huawei.middleware.dtm</groupId>
-                <artifactId>dtm-client-all</artifactId>
+                <artifactId>dtm-servicecomb-starter</artifactId>
                 <version>${dtm.version}</version>
             </dependency>
             <dependency>
@@ -58,14 +58,10 @@
             <groupId>org.apache.servicecomb</groupId>
             <artifactId>servicestage-environment</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.servicecomb</groupId>
-            <artifactId>dtm</artifactId>
-        </dependency>
         <!--		DTM-->
         <dependency>
             <groupId>com.huawei.middleware.dtm</groupId>
-            <artifactId>dtm-client-all</artifactId>
+            <artifactId>dtm-servicecomb-starter</artifactId>
             <exclusions>
                 <exclusion>
                     <artifactId>spring-boot-starter-logging</artifactId>
