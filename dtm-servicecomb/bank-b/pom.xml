@@ -22,7 +22,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>bank-b-service</finalName>
+        <finalName>bankB-service-servicecomb</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

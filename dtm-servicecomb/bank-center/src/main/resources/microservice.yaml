@@ -1,17 +1,21 @@
 port: 1110
 APPLICATION_ID: dtm
 service_description:
-  name: bank-center
+  name: dtm-bankcenter
   version: 1.0.1
   environment: development
 servicecomb:
+  request: #请求配置
+    timeout: 60000 #微服务消费端超时时间,60s
+  metrics:
+    enabled: false
   monitor:
     client:
       enable: false
   release_way: canary  #新版本灰度开关
   service:
     registry:
-      address: ${cse_address}               #本地中心
+      address: ${cse_address}
       instance:
         watch: false
         pull:

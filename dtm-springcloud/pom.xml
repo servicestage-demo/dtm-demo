@@ -21,7 +21,9 @@
         <springboot-version>2.3.10.RELEASE</springboot-version>
         <spring-cloud.version>Hoxton.SR11</spring-cloud.version>
         <spring-boot.version>2.3.10.RELEASE</spring-boot.version>
-        <dtm.version>3.0.2</dtm.version>
+        <dtm.version>3.0.4</dtm.version>
+        <rocketmq.version>4.8.0</rocketmq.version>
+        <commons-beanutils>1.9.4</commons-beanutils>
     </properties>
 
     <modules>
@@ -31,10 +33,17 @@
         <module>bankA-service</module>
         <module>bankB-service</module>
         <module>invoke-service</module>
+        <module>mq-service</module>
+        <module>mq-consumer</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-beanutils}</version>
+            </dependency>
             <dependency>
                 <groupId>com.huawei.middleware.dtm</groupId>
                 <artifactId>dtm-springcloud-feign-starter</artifactId>
@@ -44,6 +53,16 @@
                 <groupId>com.huawei.middleware.dtm</groupId>
                 <artifactId>dtm-springcloud-rest-starter</artifactId>
                 <version>${dtm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.huawei.middleware.dtm</groupId>
+                <artifactId>dtm-client-tcc-mq-rocketmq</artifactId>
+                <version>${dtm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>${rocketmq.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>

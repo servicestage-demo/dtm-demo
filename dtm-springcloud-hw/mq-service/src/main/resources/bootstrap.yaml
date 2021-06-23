@@ -1,0 +1,20 @@
+server:
+  port: 8383
+dtm:
+  invoke:
+    mode: ${invoke_mode}
+
+spring:
+  application:
+    name: dtm-mq
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    servicecomb:
+      discovery:
+        version: 1.0.0
+        enabled: true
+        address: ${invoke_mode}
+        watch: false
+        app-name: dtm-demo # SpringCloud HW 逻辑, 只有在同一个 APP 里面的 服务才能相互调用
+        service-name: ${spring.application.name}

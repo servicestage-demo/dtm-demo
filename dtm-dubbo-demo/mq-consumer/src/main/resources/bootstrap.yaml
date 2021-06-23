@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: mq-consumer
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    zookeeper:
+      enabled: true
+      connect-string: ${regitry_ip}:${registry_port}
+  datasource:
+    bank:
+      username: ${db_user_name}
+      password: ${db_user_pwd}
+      url: jdbc:mysql://${db_ip}:3306/bankb?verifyServerCertificate=false&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      driver-class-name: com.mysql.cj.jdbc.Driver

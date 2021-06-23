@@ -21,10 +21,13 @@ import java.util.List;
 public class InvokeStarter implements ApplicationRunner {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(InvokeStarter.class);
 
+    public static final int ACCOUNT = 500;
+
     @Autowired
     private TransferService transferService;
 
-    private static final int ACCOUNT = 500;
+    @Autowired
+    IBankOperator bankOperator;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -37,7 +40,7 @@ public class InvokeStarter implements ApplicationRunner {
         while (true) {
             try {
                 Arrays.stream(MenuOpEnum.values()).forEach(CmdUtils::println);
-                CmdUtils.println("请输入命令执行操作：");
+                CmdUtils.println("请输入命令执行操作：(当前远程调用/%s)", bankOperator.currentMode());
                 int cmd = CmdUtils.readCmd(8);
                 switch (MenuOpEnum.values()[cmd]) {
                     case EXIT:
@@ -50,7 +53,13 @@ public class InvokeStarter implements ApplicationRunner {
                         transferService.queryBankMoney();
                         break;
                     case DTM_TRANSFER_MICRO:
-                        transferService.doExecuteMicro(userIds);
+                        transferService.doExecuteMicro(userIds, false);
+                        break;
+                    case DTM_MQ_MICRO:
+                        transferService.doExecuteMicro(userIds, true);
+                        break;
+                    case DTM_TCC_MICRO:
+                        transferService.transferTcc();
                         break;
                 }
             } catch (Throwable throwable) {

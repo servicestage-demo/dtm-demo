@@ -1,0 +1,13 @@
+dubbo:
+  registry:
+    address: zookeeper://${regitry_ip}:${registry_port}
+  metadata-report:
+    address: zookeeper://${regitry_ip}:${registry_port}
+  scan:
+    base-packages: com.huawei.dubbo.invoke
+  protocols:
+    dubbo:
+      name: dubbo
+      port: -1
+server:
+  port: 8099

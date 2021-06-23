@@ -5,7 +5,6 @@ import com.huawei.dtm.invoke.utils.CmdUtils;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -22,14 +21,13 @@ import java.util.List;
 public class InvokeStarter implements ApplicationRunner {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(InvokeStarter.class);
 
-    private static final int ACCOUNT = 500;
+    public static final int ACCOUNT = 500;
 
     @Autowired
     private TransferService transferService;
 
     @Autowired
-    @Qualifier("use-feign")
-    private boolean useFeign;
+    IBankOperator bankOperator;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -42,23 +40,26 @@ public class InvokeStarter implements ApplicationRunner {
         while (true) {
             try {
                 Arrays.stream(MenuOpEnum.values()).forEach(CmdUtils::println);
-                CmdUtils.println("请输入命令执行操作：(当前远程调用/%s)", useFeign ? "feign" : "rest");
+                CmdUtils.println("请输入命令执行操作：(当前远程调用/%s)", bankOperator.currentMode());
                 int cmd = CmdUtils.readCmd(8);
                 switch (MenuOpEnum.values()[cmd]) {
                     case EXIT:
                         System.exit(0);
                         break;
                     case DTM_INIT_DB:
-                        transferService.initBankAccount(useFeign);
+                        transferService.initBankAccount();
                         break;
                     case DTM_QUERY_ACCOUNT:
-                        transferService.queryBankMoney(useFeign);
+                        transferService.queryBankMoney();
                         break;
                     case DTM_TRANSFER_MICRO:
-                        transferService.doExecuteMicro(userIds, useFeign);
+                        transferService.doExecuteMicro(userIds, false);
+                        break;
+                    case DTM_MQ_MICRO:
+                        transferService.doExecuteMicro(userIds, true);
                         break;
                     case DTM_TCC_MICRO:
-                        transferService.transferTcc(useFeign);
+                        transferService.transferTcc();
                         break;
                 }
             } catch (Throwable throwable) {

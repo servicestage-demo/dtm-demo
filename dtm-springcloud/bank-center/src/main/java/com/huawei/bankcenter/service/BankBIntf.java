@@ -17,7 +17,7 @@ public interface BankBIntf {
         @RequestParam(value = "errRate") int errRate);
 
     @GetMapping(value = "transferTcc")
-    String transferTcc();
+    String transferTcc(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money);
 
     @GetMapping(value = "init")
     String init(@RequestParam(value = "userId") int userId, @RequestParam(value = "money") int money);

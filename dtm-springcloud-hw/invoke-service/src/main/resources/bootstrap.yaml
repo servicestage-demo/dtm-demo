@@ -1,5 +1,8 @@
 server:
   port: 8032
+dtm:
+  invoke:
+    mode: ${invoke_mode}
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -12,5 +15,5 @@ spring:
         enabled: true
         address: ${cse_address}
         watch: false
-        app-name: dtm-demo
+        app-name: dtm-demo # SpringCloud HW 逻辑, 只有在同一个 APP 里面的 服务才能相互调用
         service-name: ${spring.application.name}

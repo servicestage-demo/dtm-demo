@@ -1,6 +1,8 @@
 server:
   port: 8029
-
+dtm:
+  invoke:
+    mode: ${invoke_mode}
 spring:
   application:
     name: dtm-bankcenter
@@ -13,5 +15,5 @@ spring:
         enabled: true
         address: ${cse_address}
         watch: false
-        app-name: dtm-demo
+        app-name: dtm-demo # SpringCloud HW 逻辑, 只有在同一个 APP 里面的 服务才能相互调用
         service-name: ${spring.application.name}

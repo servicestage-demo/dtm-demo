@@ -3,6 +3,8 @@ package com.huawei.bankb.controller;
 import com.huawei.common.impl.BankBService;
 import com.huawei.common.util.ExceptionUtils;
 import com.huawei.middleware.dtm.client.context.DTMContext;
+import com.huawei.middleware.dtm.client.tcc.annotations.DTMTccBranch;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +46,31 @@ public class BankBController {
     }
 
     /**
+     * bankB 转入的TCC实现
+     */
+    @GetMapping(value = "transferTcc")
+    @DTMTccBranch(identifier = "tcc-try-transfer-out", confirmMethod = "confirm", cancelMethod = "cancel")
+    public void tryTransferOut(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money) {
+        bankBService.tryTransferOut(id, money);
+    }
+
+    public void confirm() {
+        bankBService.confirm();
+    }
+
+    public void cancel() {
+        bankBService.cancel();
+    }
+
+    /**
      * bankB 初始化
-     * @param userIds 账号
+     * @param userId 账号
      * @param money 钱数
      */
     @GetMapping(value = "init")
-    public String init(@RequestParam(value = "userIds") int userIds, @RequestParam(value = "money") int money) {
+    public String init(@RequestParam(value = "userId") int userId, @RequestParam(value = "money") int money) {
         LOGGER.info("bankB init");
-        bankBService.initUserAccount(userIds, money);
+        bankBService.initUserAccount(userId, money);
         return "ok";
     }
 
@@ -60,19 +79,12 @@ public class BankBController {
      * @param id 账号
      * @return
      */
-    @GetMapping(value = "queryByID")
-    public long queryByID(@RequestParam(value = "id") int id) {
+    @GetMapping(value = "query")
+    public long query(@RequestParam(value = "id") int id) {
         return bankBService.queryMoneyById(id);
     }
 
-    /**
-     * bankB 查询
-     * @return
-     */
-    @GetMapping(value = "query")
-    public long query() {
-        return bankBService.querySumMoney();
-    }
+
 
     @GetMapping(value = "/sleep")
     public int getSleepMs() {

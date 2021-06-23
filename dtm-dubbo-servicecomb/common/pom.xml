@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>dtm-dubbo-servicecomb</artifactId>
+        <groupId>org.example</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>common</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!--        DTM       -->
+        <dependency>
+            <groupId>com.huawei.middleware.dtm</groupId>
+            <artifactId>dtm-dubbo-starter</artifactId>
+        </dependency>
+        <!--        dubbo servicecomb依赖    -->
+        <dependency>
+            <groupId>com.huaweicloud.dubbo-servicecomb</groupId>
+            <artifactId>dubbo-servicecomb-service-center</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.huaweicloud.dubbo-servicecomb</groupId>
+            <artifactId>dubbo-servicecomb-governance-center</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.huaweicloud.dubbo-servicecomb</groupId>
+            <artifactId>dubbo-servicecomb-config-center</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.huaweicloud.dubbo-servicecomb</groupId>
+            <artifactId>dubbo-servicecomb-spring-boot</artifactId>
+        </dependency>
+        <!--        dubbo 依赖    -->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-config-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-registry-multicast</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-rpc-dubbo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-rpc-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-remoting-netty4</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-serialization-hessian2</artifactId>
+        </dependency>
+
+    </dependencies>
+</project>

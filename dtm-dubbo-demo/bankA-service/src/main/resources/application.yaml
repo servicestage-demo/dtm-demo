@@ -1,0 +1,20 @@
+dubbo:
+  registry:
+    address: zookeeper://${regitry_ip}:${registry_port}
+  metadata-report:
+    address: zookeeper://${regitry_ip}:${registry_port}
+  scan:
+    base-packages: com.huawei.dubbo.banka
+  protocols:
+    dubbo:
+      name: dubbo
+      port: -1
+server:
+  port: 8087
+spring:
+  datasource:
+    bank:
+      username: ${db_user_name}
+      password: ${db_user_pwd}
+      url: jdbc:mysql://${db_ip}:3306/banka?verifyServerCertificate=false&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      driver-class-name: com.mysql.cj.jdbc.Driver

@@ -22,6 +22,8 @@ public abstract class AbsBankService {
         if (userId == 0) {
             jdbcTemplate.execute(DtmConst.InitSql.CREATE_TABLE_SQL);
             jdbcTemplate.execute(DtmConst.InitSql.TRUNCATE_SQL);
+            jdbcTemplate.execute(DtmConst.InitSql.CREATE_TABLE_TRANSACTION_SQL);
+            jdbcTemplate.execute(DtmConst.InitSql.TRUNCATE_TRANSACTION_SQL);
         }
         jdbcTemplate.update(DtmConst.InitSql.INSERT_SQL, userId, total);
     }
@@ -36,5 +38,24 @@ public abstract class AbsBankService {
 
     public long querySumMoney() {
         return jdbcTemplate.queryForObject(DtmConst.QuerySql.QUERY_BANK_SUM_MONEY, Long.class);
+    }
+
+    public static class Transfer {
+        int userId;
+        int money;
+
+        public Transfer(int userId, int money) {
+            super();
+            this.userId = userId;
+            this.money = money;
+        }
+
+        public int getUserId() {
+            return userId;
+        }
+
+        public int getMoney() {
+            return money;
+        }
     }
 }

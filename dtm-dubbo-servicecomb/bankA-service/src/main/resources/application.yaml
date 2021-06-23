@@ -1,0 +1,13 @@
+server:
+  port: 8037
+spring:
+  application:
+    name: dtm-banka
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    bank:
+      username: ${db_user_name}
+      password: ${db_user_pwd}
+      url: jdbc:mysql://${db_ip}/banka?verifyServerCertificate=false&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      driver-class-name: com.mysql.cj.jdbc.Driver

@@ -27,5 +27,6 @@ public interface BankCenterService {
         @RequestParam(value = "errRate") int errRate);
 
     @GetMapping(value = "transferTcc")
-    String transferTcc(@RequestParam(value = "exception") int exception);
+    String transferTcc(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money,
+        @RequestParam(value = "exception") boolean exception);
 }

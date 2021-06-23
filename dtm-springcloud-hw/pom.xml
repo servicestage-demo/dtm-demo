@@ -14,18 +14,65 @@
         <module>bankB-service</module>
         <module>invoke-service</module>
         <module>bank-center</module>
+        <module>mq-service</module>
+        <module>mq-consumer</module>
     </modules>
 
     <properties>
-        <sch.version>1.5.1-Hoxton</sch.version>
-        <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
-        <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
-        <dtm.version>3.0.2</dtm.version>
+        <sch.version>1.5.9-Hoxton</sch.version>
+        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+        <spring-boot.version>2.3.5.RELEASE</spring-boot.version>
+        <dtm.version>3.0.4</dtm.version>
         <mysql.version>8.0.16</mysql.version>
+        <druid.version>1.1.16</druid.version>
+        <rocketmq.version>4.8.0</rocketmq.version>
+        <commons-beanutils>1.9.4</commons-beanutils>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-beanutils}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.huawei.middleware.dtm</groupId>
+                <artifactId>dtm-client-tcc-mq-rocketmq</artifactId>
+                <version>${dtm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>${rocketmq.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.huawei.middleware.dtm</groupId>
+                <artifactId>dtm-springcloud-feign-starter</artifactId>
+                <version>${dtm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.huawei.middleware.dtm</groupId>
+                <artifactId>dtm-springcloud-rest-starter</artifactId>
+                <version>${dtm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.huaweicloud</groupId>
+                <artifactId>spring-cloud-huawei-bom</artifactId>
+                <version>${sch.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -40,59 +87,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>com.huaweicloud</groupId>
-                <artifactId>spring-cloud-huawei-bom</artifactId>
-                <version>${sch.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring-boot.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-            <version>${spring-boot.version}</version>
-        </dependency>
-        <!--        Spring cloud HW       -->
-        <dependency>
-            <groupId>com.huaweicloud</groupId>
-            <artifactId>spring-cloud-starter-huawei-swagger</artifactId>
-            <version>${sch.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.huaweicloud</groupId>
-            <artifactId>spring-cloud-starter-huawei-servicecomb-discovery</artifactId>
-            <version>${sch.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.huaweicloud</groupId>
-            <artifactId>spring-cloud-starter-huawei-router</artifactId>
-            <version>${sch.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
-        </dependency>
-        <!--        DTM       -->
-        <dependency>
-            <groupId>com.huawei.middleware.dtm</groupId>
-            <artifactId>dtm-springcloud-feign-starter</artifactId>
-            <version>${dtm.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.huawei.middleware.dtm</groupId>
-            <artifactId>dtm-springcloud-rest-starter</artifactId>
-            <version>${dtm.version}</version>
-        </dependency>
-    </dependencies>
 
 </project>

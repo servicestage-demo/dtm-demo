@@ -1,8 +1,10 @@
 package com.huawei.bankb.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import com.huawei.common.impl.BankBService;
 import com.huawei.middleware.dtm.client.datasource.proxy.DTMDataSource;
+
+import com.alibaba.druid.pool.DruidDataSource;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -13,6 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
+
 /**
  * bankB 增加数据源
  */
@@ -50,7 +53,7 @@ public class WebConfig {
 
     @Bean
     public BankBService bankService(@Qualifier("bankJdbcTemplate") JdbcTemplate bankJdbcTemplate,
-                                    @Qualifier("bankDataSource") DataSource dataSource) {
+        @Qualifier("bankDataSource") DataSource dataSource) {
         return new BankBService(bankJdbcTemplate, dataSource);
     }
 

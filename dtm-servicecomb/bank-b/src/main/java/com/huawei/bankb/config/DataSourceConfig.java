@@ -4,7 +4,7 @@
 
 package com.huawei.bankb.config;
 
-import com.huawei.common.BankService;
+import com.huawei.common.impl.BankBService;
 import com.huawei.middleware.dtm.client.datasource.proxy.DTMDataSource;
 
 import com.alibaba.druid.pool.DruidDataSource;
@@ -34,10 +34,9 @@ public class DataSourceConfig {
     @Value("${spring.datasource.bankb.driver-class-name}")
     private String driverClassNameB;
 
-    @Bean(name = "BankBDataSource")
-    @Qualifier("BankBDataSource")
+    @Bean(name = "bankDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.bankb")
-    public DataSource bankBDataSource() {
+    public DataSource bankDataSource() {
         DruidDataSource datasource = new DruidDataSource();
         datasource.setUrl(dbUrlB);
         datasource.setUsername(usernameB);
@@ -46,16 +45,18 @@ public class DataSourceConfig {
         datasource.setInitialSize(10);
         datasource.setMaxActive(20);
         return new DTMDataSource(datasource);
+        // return datasource;
     }
 
-    @Bean(name = "bankbJdbcTemplate")
-    public JdbcTemplate bankbJdbcTemplate(@Qualifier("BankBDataSource") DataSource dataSource) {
+
+    @Bean(name = "bankJdbcTemplate")
+    public JdbcTemplate bankJdbcTemplate(@Qualifier("bankDataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 
     @Bean
-    public BankService bankBService(@Qualifier("bankbJdbcTemplate") JdbcTemplate bankbJdbcTemplate,
-        @Qualifier("BankBDataSource") DataSource dataSource) {
-        return new BankService(bankbJdbcTemplate, dataSource);
+    public BankBService bankService(@Qualifier("bankJdbcTemplate") JdbcTemplate bankJdbcTemplate,
+        @Qualifier("bankDataSource") DataSource dataSource) {
+        return new BankBService(bankJdbcTemplate, dataSource);
     }
 }

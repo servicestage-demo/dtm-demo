@@ -50,23 +50,16 @@ public class BankBController {
      */
     @GetMapping(value = "transferTcc")
     @DTMTccBranch(identifier = "tcc-try-transfer-out", confirmMethod = "confirm", cancelMethod = "cancel")
-    public void tryTransferOut() {
-        DTMContext dtmContext = DTMContext.getDTMContext();
-        LOGGER.info("Tcc global-tx-id : {}, try transfer out", dtmContext.getGlobalTxId());
+    public void tryTransferOut(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money) {
+        bankBService.tryTransferOut(id, money);
     }
 
     public void confirm() {
-        DTMContext dtmContext = DTMContext.getDTMContext();
-        LOGGER.info("TCC confirm start");
-        LOGGER.info("Customer-implemented business methods,Tcc global-tx-id: {}, branch-tx-id: {} confirm transfer out", dtmContext.getGlobalTxId(), dtmContext.getBranchTxId());
-        LOGGER.info("TCC confirm end");
+        bankBService.confirm();
     }
 
     public void cancel() {
-        DTMContext dtmContext = DTMContext.getDTMContext();
-        LOGGER.info("TCC cancel start");
-        LOGGER.info("Customer-implemented business methods,Tcc global-tx-id: {}, branch-tx-id: {} cancel transfer out", dtmContext.getGlobalTxId(), dtmContext.getBranchTxId());
-        LOGGER.info("TCC cancel end");
+        bankBService.cancel();
     }
 
     /**

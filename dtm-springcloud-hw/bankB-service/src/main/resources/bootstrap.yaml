@@ -10,5 +10,5 @@ spring:
         enabled: true
         address: ${cse_address}
         watch: false
-        app-name: dtm-demo
-        service-name: ${spring.application.name}
+        app-name: dtm-demo # SpringCloud HW 逻辑, 只有在同一个 APP 里面的 服务才能相互调用
+        service-name: dtm-bankb

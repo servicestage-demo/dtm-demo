@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: dtm-bank-center
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    zookeeper:
+      enabled: true
+      connect-string: ${regitry_ip}:${registry_port}

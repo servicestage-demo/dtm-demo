@@ -2,8 +2,8 @@ server:
   port: 8032
 
 dtm:
-  use-feign: true
-
+  invoke:
+    mode: feign
 spring:
   application:
     name: dtm-client

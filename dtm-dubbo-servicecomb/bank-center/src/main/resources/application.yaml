@@ -1,0 +1,7 @@
+server:
+  port: 8031
+
+spring:
+  application:
+    name: bank-center
+

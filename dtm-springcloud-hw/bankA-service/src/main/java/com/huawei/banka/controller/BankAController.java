@@ -2,6 +2,8 @@ package com.huawei.banka.controller;
 
 import com.huawei.common.impl.BankAService;
 import com.huawei.middleware.dtm.client.context.DTMContext;
+import com.huawei.middleware.dtm.client.tcc.annotations.DTMTccBranch;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,40 +28,47 @@ public class BankAController {
      * @param money 钱数
      */
     @GetMapping(value = "transfer")
-    public String transfer(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money) {
+    public String transfer(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money, @RequestParam(value = "errRate") int errRate) {
         LOGGER.info("global tx id:{}, transfer in", DTMContext.getDTMContext().getGlobalTxId());
         bankAService.transferIn(id, money);
         return "ok";
     }
 
     /**
+     * bankA 转入的TCC实现
+     */
+    @GetMapping(value = "transferTcc")
+    @DTMTccBranch(identifier = "tcc-try-transfer-in", confirmMethod = "confirm", cancelMethod = "cancel")
+    public void tryTransferIn(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money) {
+        bankAService.tryTransferIn(id, money);
+    }
+
+    public void confirm() {
+        bankAService.confirm();
+    }
+
+    public void cancel() {
+        bankAService.cancel();
+    }
+
+    /**
      * bankA 初始化
-     * @param userIds 账号
+     * @param userId 账号
      * @param money 钱数
      */
     @GetMapping(value = "init")
-    public String init(@RequestParam(value = "userIds") int userIds, @RequestParam(value = "money") int money) {
+    public String init(@RequestParam(value = "userId") int userId, @RequestParam(value = "money") int money) {
         LOGGER.info("bankA init");
-        bankAService.initUserAccount(userIds, money);
+        bankAService.initUserAccount(userId, money);
         return "ok";
     }
 
     /**
      * bankA 查询
      * @param id 账号
-     * @return
-     */
-    @GetMapping(value = "queryByID")
-    public long queryByID(@RequestParam(value = "id") int id) {
-        return bankAService.queryMoneyById(id);
-    }
-
-    /**
-     * bankA 查询
-     * @return
      */
     @GetMapping(value = "query")
-    public long query() {
-        return bankAService.querySumMoney();
+    public long query(@RequestParam(value = "id") int id) {
+        return bankAService.queryMoneyById(id);
     }
 }
