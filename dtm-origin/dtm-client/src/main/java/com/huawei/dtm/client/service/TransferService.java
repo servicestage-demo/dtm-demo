@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Component
 public class TransferService {
@@ -21,6 +22,8 @@ public class TransferService {
     private static final int ACCOUNT = 500;
 
     public static final int INIT_MONEY = 1000000;
+
+    public static final int TRAN_MONEY = 100;
 
     private BankAService bankAService;
 
@@ -54,36 +57,15 @@ public class TransferService {
      * TCC 用例 -> 使用DTM事务验证成功场景
      */
     @DTMTxBegin(appName = "transfer-tcc-success")
-    public void transferTccLocalSuccess() {
-        bankAService.tryTransferIn();
-        bankBService.tryTransferOut();
-    }
-
-    /**
-     * TCC 用例 -> 不使用DTM事务验证成功场景
-     */
-    public void transferTccLocalSuccessUnable() {
-        bankAService.tryTransferInUnable();
-        bankBService.tryTransferOutUnable();
-    }
-
-    /**
-     * TCC 用例 -> 使用DTM事务验证失败场景
-     */
-    @DTMTxBegin(appName = "transfer-tcc-fail")
-    public void transferTccLocalFail() {
-        bankAService.tryTransferIn();
-        bankBService.tryTransferOut();
-        ExceptionUtils.addRuntimeException(100);
-    }
-
-    /**
-     * TCC 用例 -> 不使用DTM事务验证失败场景
-     */
-    public void transferTccLocalFailUnable() {
-        bankAService.tryTransferInUnable();
-        bankBService.tryTransferOutUnable();
-        ExceptionUtils.addRuntimeException(100);
+    public void transferTccLocal() {
+        CmdUtils.println("是否模拟发生异常情况: 输入 0 无异常  输入 1 发生异常");
+        int exception = CmdUtils.readCmd(2);
+        int userId = new Random().nextInt(ACCOUNT);
+        bankAService.tryTransferIn(userId, TRAN_MONEY);
+        bankBService.tryTransferOut(userId, TRAN_MONEY);
+        if (exception == 1) {
+            ExceptionUtils.addRuntimeException(100);
+        }
     }
 
     /**

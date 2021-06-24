@@ -60,17 +60,8 @@ public class ClientStarter implements ApplicationRunner {
                     case DTM_TRANSFER_LOCAL:
                         doExecuteLocal(userIds);
                         break;
-                    case DTM_TCC_TRANSFER_LOCAL_SUCCESS_UNABLE:
-                        transferService.transferTccLocalSuccessUnable();
-                        break;
-                    case DTM_TCC_TRANSFER_LOCAL_SUCCESS:
-                        transferService.transferTccLocalSuccess();
-                        break;
-                    case DTM_TCC_TRANSFER_LOCAL_FAIL_UNABLE:
-                        transferService.transferTccLocalFailUnable();
-                        break;
-                    case DTM_TCC_TRANSFER_LOCAL_FAIL:
-                        transferService.transferTccLocalFail();
+                    case DTM_TCC_TRANSFER_LOCAL:
+                        transferService.transferTccLocal();
                         break;
                 }
             } catch (Throwable throwable) {

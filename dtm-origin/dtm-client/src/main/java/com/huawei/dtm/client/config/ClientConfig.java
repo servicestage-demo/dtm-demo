@@ -53,6 +53,7 @@ public class ClientConfig {
         datasource.setInitialSize(10);
         datasource.setMaxActive(100);
         return new DTMDataSource(datasource);
+        // return datasource;
     }
 
     @Bean(name = "bankAJdbcTemplate")
@@ -78,6 +79,7 @@ public class ClientConfig {
         datasource.setInitialSize(10);
         datasource.setMaxActive(100);
         return new DTMDataSource(datasource);
+        // return datasource;
     }
 
     @Bean(name = "bankBJdbcTemplate")
