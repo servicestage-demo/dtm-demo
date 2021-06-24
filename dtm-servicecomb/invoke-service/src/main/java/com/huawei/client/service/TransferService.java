@@ -24,7 +24,7 @@ public class TransferService {
 
     public static final int TRAN_MONEY = 100;
 
-    public static final int ACCOUNT = 50;
+    public static final int ACCOUNT = 500;
 
     private static final String PRINT_TMPL = "|%14s|%19s|%19s|%13s|";
 
