@@ -1,5 +1,5 @@
 server:
-  port: 8383
+  port: 8323
 dtm:
   invoke:
     mode: ${invoke_mode}
