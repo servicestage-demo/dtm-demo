@@ -1,5 +1,5 @@
 server:
-  port: 8030
+  port: 8020
 spring:
   application:
     name: dtm-banka
