@@ -5,7 +5,7 @@ public enum MenuOpEnum {
     DTM_QUERY_ACCOUNT("查询 Bank A 和 Bank B 余额"),
     DTM_TRANSFER_MICRO("非侵入用例 -> DTM 事务 微服务场景调用"),
     DTM_TCC_MICRO("TCC用例 -> DTM 事务 微服务场景调用"),
-    EXIT("EXIST");
+    EXIT("EXIT");
 
     private String des;
 
