@@ -9,7 +9,7 @@ public enum MenuOpEnum {
 
     DTM_TCC_MICRO("TCC用例 -> DTM 事务 微服务场景调用"),
 
-    EXIT("EXIST");
+    EXIT("EXIT");
 
     private String des;
 
