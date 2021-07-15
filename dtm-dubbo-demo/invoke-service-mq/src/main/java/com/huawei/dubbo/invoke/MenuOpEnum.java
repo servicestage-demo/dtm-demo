@@ -7,7 +7,7 @@ public enum MenuOpEnum {
 
     DTM_MQ_MICRO("DTM对接消息用例 -> DTM 事务 微服务场景调用"),
 
-    EXIT("EXIST");
+    EXIT("EXIT");
 
     private String des;
 
