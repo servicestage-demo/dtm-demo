@@ -29,7 +29,7 @@ public class BankCenterController implements IBankCenterController {
     private IBankAController bankAController;
 
     @Override
-    @DTMTxBegin(appName = "noninvasive-transfer-dubbo-servicecomb")
+    @DTMTxBegin(appName = "noninvasive-transfer-dubbo")
     public String transfer(int id, int money, int errRate) {
         LOGGER.info("Bank-center start invoke bankA and bankB: {}", DTMContext.getDTMContext().getGlobalTxId());
         bankAController.transfer(id, money, errRate);
@@ -38,7 +38,7 @@ public class BankCenterController implements IBankCenterController {
     }
 
     @Override
-    @DTMTxBegin(appName = "tcc-transfer-dubbo-servicecomb")
+    @DTMTxBegin(appName = "tcc-transfer-dubbo")
     public String transferTcc(int id, int money, boolean exception) {
         LOGGER.info("Bank-center start invoke bankA and bankB by tcc_mode");
         bankAController.tryTransferIn(id, money);

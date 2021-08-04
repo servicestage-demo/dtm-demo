@@ -29,7 +29,7 @@ public class BankCenterController {
      * @param errRate 异常概率
      */
     @GetMapping(value = "transfer")
-    @DTMTxBegin(appName = "noninvasive-transfer")
+    @DTMTxBegin(appName = "noninvasive-transfer-SpringCloudHW")
     public String transfer(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money,
         @RequestParam(value = "errRate") int errRate) {
         LOGGER.info("Bank-center start invoke bankA and bankB");
@@ -46,7 +46,7 @@ public class BankCenterController {
      * @return
      */
     @GetMapping(value = "transferTcc")
-    @DTMTxBegin(appName = "tcc-transfer")
+    @DTMTxBegin(appName = "tcc-transfer-SpringCloudHW")
     public String transferTcc(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money,
         @RequestParam(value = "exception") boolean exception) {
         LOGGER.info("Bank-center start invoke bankA and bankB by tcc_mode");

@@ -31,7 +31,7 @@ public class MqServiceController implements IBankMqController {
     private RocketMqTemplate rocketMqTemplate;
 
     @Override
-    @DTMTxBegin(appName = "mq-transfer-dubbo-servicecomb")
+    @DTMTxBegin(appName = "mq-transfer-dubbo")
     public String transfer(int id, int money, int errRate) throws Exception {
         LOGGER.info("mq service start invoke bankA and bankB: {}", DTMContext.getDTMContext().getGlobalTxId());
         bankAController.transfer(id, money * 2, errRate);

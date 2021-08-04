@@ -34,7 +34,7 @@ public class MqController {
      * @param errRate 异常概率
      */
     @GetMapping(value = "transfer")
-    @DTMTxBegin(appName = "noninvasive-transfer-mq")
+    @DTMTxBegin(appName = "noninvasive-transfer-mq-ServiceComb")
     public String transfer(@RequestParam(value = "id") int id, @RequestParam(value = "money") int money,
         @RequestParam(value = "errRate") int errRate) throws Exception {
         LOGGER.info("mq service start invoke bankA and bankB");
