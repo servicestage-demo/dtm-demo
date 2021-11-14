@@ -1,0 +1,7 @@
+server:
+  port: 8306
+
+spring:
+  application:
+    name: kafka-service
+

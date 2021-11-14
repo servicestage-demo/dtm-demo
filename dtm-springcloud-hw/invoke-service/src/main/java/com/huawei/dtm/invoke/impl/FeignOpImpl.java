@@ -6,6 +6,7 @@ package com.huawei.dtm.invoke.impl;
 
 import com.huawei.dtm.invoke.IBankOperator;
 import com.huawei.dtm.invoke.service.intf.BankCenterService;
+import com.huawei.dtm.invoke.service.intf.KafkaService;
 import com.huawei.dtm.invoke.service.intf.MqService;
 
 import org.slf4j.Logger;
@@ -22,9 +23,12 @@ public class FeignOpImpl implements IBankOperator {
 
     private final MqService mqService;
 
-    public FeignOpImpl(BankCenterService bankCenterService, MqService mqService) {
+    private final KafkaService kafkaService;
+
+    public FeignOpImpl(BankCenterService bankCenterService, MqService mqService, KafkaService kafkaService) {
         this.bankCenterService = bankCenterService;
         this.mqService = mqService;
+        this.kafkaService = kafkaService;
     }
 
     @Override
@@ -52,6 +56,11 @@ public class FeignOpImpl implements IBankOperator {
     @Override
     public void transferMq(int errRate, int transferMoney, int userId) {
         mqService.transfer(userId, transferMoney, errRate);
+    }
+
+    @Override
+    public void transferKafka(int errRate, int transferMoney, int userId) {
+        kafkaService.transfer(userId, transferMoney, errRate);
     }
 
     @Override

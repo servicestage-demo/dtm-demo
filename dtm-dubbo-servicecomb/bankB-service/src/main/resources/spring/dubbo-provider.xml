@@ -25,7 +25,7 @@
 
     <dubbo:registry address="sc://${registry_address}"/>
 
-    <dubbo:protocol name="dubbo" port="8074"/>
+    <dubbo:protocol name="dubbo" port="8303"/>
 
     <bean id="bankBController" class="com.huawei.dubbo.bankb.controller.BankBController"/>
     <dubbo:service interface="com.huawei.dubbo.common.intf.IBankBController" ref="bankBController"/>

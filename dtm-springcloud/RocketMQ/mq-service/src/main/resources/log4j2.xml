@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30" shutdownHook="disable">
+
+  <Properties>
+    <Property name="DTM_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} -
+      %msg%n
+    </Property>
+    <Property name="DTM_APP_LOG_ROOT">dtm-log</Property>
+    <Property name="DTM_LOG_FILE">${sys:dtm-log-file:-dtm-client}</Property>
+  </Properties>
+
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </Console>
+
+  </Appenders>
+
+  <loggers>
+
+    <logger name="com.huawei.middleware.dtm" level="INFO" additivity="false">
+
+      <appender-ref ref="Console"/>
+
+    </logger>
+
+    <logger name="com.huawei.fusionstage.middleware.dtm" level="INFO" additivity="false">
+
+      <appender-ref ref="Console"/>
+
+    </logger>
+
+    <Root level="warn">
+      <AppenderRef ref="Console"/>
+    </Root>
+
+  </loggers>
+</Configuration>

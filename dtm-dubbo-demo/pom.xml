@@ -14,9 +14,12 @@
         <module>bankA-service</module>
         <module>bankB-service</module>
         <module>invoke-service</module>
-        <module>mq-service</module>
-        <module>mq-consumer</module>
+        <module>RocketMQ/mq-service</module>
+        <module>RocketMQ/mq-consumer</module>
+        <module>Kafka/kafka-consumer</module>
+        <module>Kafka/kafka-service</module>
         <module>invoke-service-mq</module>
+        <module>invoke-service-kafka</module>
     </modules>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -29,6 +32,7 @@
         <rocketmq.version>4.8.0</rocketmq.version>
         <snake.yaml.version>1.26</snake.yaml.version>
         <commons-beanutils>1.9.4</commons-beanutils>
+        <kafka.version>2.8.1</kafka.version>
     </properties>
 
     <dependencyManagement>
@@ -83,6 +87,16 @@
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-client</artifactId>
                 <version>${rocketmq.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.huawei.middleware.dtm</groupId>
+                <artifactId>dtm-client-tcc-mq-kafka</artifactId>
+                <version>${dtm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-clients</artifactId>
+                <version>${kafka.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.yaml</groupId>

@@ -1,0 +1,7 @@
+server:
+  port: 8308
+
+spring:
+  application:
+    name: mq-service
+

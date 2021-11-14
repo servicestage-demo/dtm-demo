@@ -23,6 +23,12 @@ public class InvokeStarter implements ApplicationRunner {
 
     public static final int ACCOUNT = 500;
 
+    public static final int MICRO_TRANSFER = 0;
+
+    public static final int MQ_TRANSFER = 1;
+
+    public static final int KAFKA_TRANSFER = 2;
+
     @Autowired
     private TransferService transferService;
 
@@ -53,10 +59,13 @@ public class InvokeStarter implements ApplicationRunner {
                         transferService.queryBankMoney();
                         break;
                     case DTM_TRANSFER_MICRO:
-                        transferService.doExecuteMicro(userIds, false);
+                        transferService.doExecuteMicro(userIds, MICRO_TRANSFER);
                         break;
                     case DTM_MQ_MICRO:
-                        transferService.doExecuteMicro(userIds, true);
+                        transferService.doExecuteMicro(userIds, MQ_TRANSFER);
+                        break;
+                    case DTM_KAFKA_MICRO:
+                        transferService.doExecuteMicro(userIds, KAFKA_TRANSFER);
                         break;
                     case DTM_TCC_MICRO:
                         transferService.transferTcc();

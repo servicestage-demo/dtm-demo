@@ -1,5 +1,5 @@
 server:
-  port: 8077
+  port: 8302
 spring:
   application:
     name: dtm-banka
@@ -11,3 +11,4 @@ spring:
       password: ${db_user_pwd}
       url: jdbc:mysql://${db_ip}/banka?verifyServerCertificate=false&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       driver-class-name: com.mysql.cj.jdbc.Driver
+

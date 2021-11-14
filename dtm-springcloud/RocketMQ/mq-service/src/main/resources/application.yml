@@ -1,0 +1,16 @@
+server:
+  port: 8108
+dtm:
+  invoke:
+    mode: ${invoke_mode}
+spring:
+  application:
+    name: dtm-mq
+  main:
+    allow-bean-definition-overriding: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka_ip}:8761/eureka/
+  instance:
+    prefer-ip-address: true

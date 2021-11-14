@@ -30,6 +30,8 @@ public interface IBankOperator {
 
     void transferMq(int errRate, int transferMoney, int userId);
 
+    void transferKafka(int errRate, int transferMoney, int userId);
+
     String microTransfer(int errRate, int transferMoney, int userId);
 
     String currentMode();

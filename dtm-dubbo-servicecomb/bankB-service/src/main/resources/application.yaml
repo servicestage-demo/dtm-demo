@@ -1,5 +1,5 @@
 server:
-  port: 8074
+  port: 8303
 spring:
   application:
     name: dtm-bankb

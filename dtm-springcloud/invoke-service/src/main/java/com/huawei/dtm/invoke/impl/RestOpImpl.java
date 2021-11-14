@@ -23,6 +23,9 @@ public class RestOpImpl implements IBankOperator {
     private static final String MQ_TRANSFER
         = "http://DTM-MQ/bank-mq/transfer?id=%s&money=%s&errRate=%s";
 
+    private static final String KAFKA_TRANSFER
+        = "http://DTM-KAFKA/bank-kafka/transfer?id=%s&money=%s&errRate=%s";
+
     private static final String CENTER_TCC
         = "http://DTM-BANKCENTER/bank-center/transferTcc?id=%s&money=%s&exception=%s";
 
@@ -61,6 +64,11 @@ public class RestOpImpl implements IBankOperator {
     @Override
     public void transferMq(int errRate, int transferMoney, int userId) {
         restTemplate.getForObject(String.format(MQ_TRANSFER, userId, transferMoney, errRate), String.class);
+    }
+
+    @Override
+    public void transferKafka(int errRate, int transferMoney, int userId) {
+        restTemplate.getForObject(String.format(KAFKA_TRANSFER, userId, transferMoney, errRate), String.class);
     }
 
     @Override

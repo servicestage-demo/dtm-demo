@@ -15,8 +15,11 @@
         <module>bankB-service</module>
         <module>invoke-service</module>
         <module>invoke-service-mq</module>
-        <module>mq-service</module>
-        <module>mq-consumer</module>
+        <module>invoke-service-kafka</module>
+        <module>RocketMQ/mq-service</module>
+        <module>RocketMQ/mq-consumer</module>
+        <module>Kafka/kafka-service</module>
+        <module>Kafka/kafka-consumer</module>
     </modules>
 
     <properties>
@@ -30,6 +33,7 @@
         <dubbo-servicecomb.version>1.3.6</dubbo-servicecomb.version>
         <dubbo.version>2.7.8</dubbo.version>
         <spring-web.version>5.2.5.RELEASE</spring-web.version>
+        <kafka.version>2.8.1</kafka.version>
     </properties>
 
     <dependencyManagement>
@@ -86,6 +90,16 @@
                 <groupId>com.huawei.middleware.dtm</groupId>
                 <artifactId>dtm-dubbo-starter</artifactId>
                 <version>${dtm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.huawei.middleware.dtm</groupId>
+                <artifactId>dtm-client-tcc-mq-kafka</artifactId>
+                <version>${dtm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-clients</artifactId>
+                <version>${kafka.version}</version>
             </dependency>
 
         </dependencies>

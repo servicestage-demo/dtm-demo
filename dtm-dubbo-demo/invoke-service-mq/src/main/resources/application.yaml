@@ -10,4 +10,4 @@ dubbo:
       name: dubbo
       port: -1
 server:
-  port: 8094
+  port: 8407

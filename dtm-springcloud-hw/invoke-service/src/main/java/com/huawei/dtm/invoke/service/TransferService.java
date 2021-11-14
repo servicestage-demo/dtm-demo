@@ -22,6 +22,12 @@ public class TransferService {
 
     public static final int TRAN_MONEY = 100;
 
+    public static final int MICRO_TRANSFER = 0;
+
+    public static final int MQ_TRANSFER = 1;
+
+    public static final int KAFKA_TRANSFER = 2;
+
     private static final String PRINT_TMPL = "|%14s|%19s|%19s|%13s|";
 
     private static final String CENTER_TRANSFER
@@ -46,7 +52,7 @@ public class TransferService {
     /**
      * 微服务调用bankA转入、bankB转出
      */
-    public void doExecuteMicro(List<Integer> userIds, boolean mq) throws Exception {
+    public void doExecuteMicro(List<Integer> userIds, int type) throws Exception {
         CmdUtils.println("请输入线程数量:单线程事务数量:异常概率");
         String input = console.readLine();
         int threadNum = Integer.parseInt(input.split(":")[0]);
@@ -68,10 +74,16 @@ public class TransferService {
             new Thread(() -> {
                 for (int j = 0; j < txNum; j++) {
                     try {
-                        if (mq) {
-                            bankOperator.transferMq(errRate, TRAN_MONEY, userIds.get((count * txNum + j) % ACCOUNT));
-                        } else {
-                            bankOperator.microTransfer(errRate, TRAN_MONEY, userIds.get((count * txNum + j) % ACCOUNT));
+                        switch (type) {
+                            case MICRO_TRANSFER:
+                                bankOperator.microTransfer(errRate, TRAN_MONEY, userIds.get((count * txNum + j) % ACCOUNT));
+                                break;
+                            case MQ_TRANSFER:
+                                bankOperator.transferMq(errRate, TRAN_MONEY, userIds.get((count * txNum + j) % ACCOUNT));
+                                break;
+                            case KAFKA_TRANSFER:
+                                bankOperator.transferKafka(errRate, TRAN_MONEY, userIds.get((count * txNum + j) % ACCOUNT));
+                                break;
                         }
                         Thread.sleep(100);
                     } catch (Exception e) {
