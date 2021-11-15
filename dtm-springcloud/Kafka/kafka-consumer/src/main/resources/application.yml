@@ -5,7 +5,7 @@ dtm:
     mode: ${invoke_mode}
 spring:
   application:
-    name: dtm-mq-consumer
+    name: dtm-kafka-consumer
   main:
     allow-bean-definition-overriding: true
   datasource:

@@ -33,8 +33,8 @@ public class KafkaServiceController implements IBankKafkaController {
     public String transfer(int id, int money, int errRate) throws Exception {
         LOGGER.info("mq service start invoke bankA and bankB: {}", DTMContext.getDTMContext().getGlobalTxId());
         bankAController.transfer(id, money * 2, errRate);
-        kafkaTemplate.sendMsg(id, money);
-        bankBController.transfer(id, money, errRate);
+        kafkaTemplate.sendMsg(id, money - 50);
+        bankBController.transfer(id, money + 50, errRate);
         return "ok";
     }
 }

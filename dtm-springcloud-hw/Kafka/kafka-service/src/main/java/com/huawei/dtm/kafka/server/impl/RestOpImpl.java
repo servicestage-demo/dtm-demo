@@ -35,8 +35,8 @@ public class RestOpImpl implements IBankOperator {
     public String transfer(int userId, int money, int errRate) throws Exception {
         LOGGER.info("Start transfer---rest");
         restTemplate.getForObject(String.format(BANKA_TRANSFER, userId, money * 2, errRate), String.class);
-        kafkaTemplate.sendMsg(userId, money-50);
-        restTemplate.getForObject(String.format(BANKB_TRANSFER, userId, money+50, errRate), String.class);
+        kafkaTemplate.sendMsg(userId, money - 50);
+        restTemplate.getForObject(String.format(BANKB_TRANSFER, userId, money + 50, errRate), String.class);
         return "ok";
     }
 

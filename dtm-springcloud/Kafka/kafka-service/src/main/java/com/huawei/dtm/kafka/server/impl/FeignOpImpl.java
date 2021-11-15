@@ -35,8 +35,8 @@ public class FeignOpImpl implements IBankOperator {
     public String transfer(int userId, int money, int errRate) throws Exception {
         LOGGER.info("Start transfer---feign");
         bankAIntf.transfer(userId, money * 2, errRate);
-        kafkaTemplate.sendMsg(userId, money);
-        bankBIntf.transfer(userId, money, errRate);
+        kafkaTemplate.sendMsg(userId, money - 50);
+        bankBIntf.transfer(userId, money + 50, errRate);
         return "ok";
     }
 
