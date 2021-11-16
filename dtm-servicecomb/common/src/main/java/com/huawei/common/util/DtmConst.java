@@ -21,7 +21,7 @@ public class DtmConst {
             "    tx_id varchar(128) not null,\n" +
             "    user_id varchar(128) not null,\n" +
             "    money int,\n" +
-            "    type varchar(256) not null,\n" +
+            "    type varchar(64) not null,\n" +
             "    primary key (id, type)\n" +
             ");";
 

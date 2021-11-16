@@ -14,17 +14,19 @@
         <module>invoke-service</module>
         <module>bank-b</module>
         <module>bank-center</module>
-        <module>mq-service</module>
-        <module>mq-consumer</module>
+        <module>RocketMQ/mq-service</module>
+        <module>RocketMQ/mq-consumer</module>
+        <module>Kafka/kafka-service</module>
+        <module>Kafka/kafka-consumer</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <servicecomb.version>2.2.0</servicecomb.version>
+        <servicecomb.version>2.5.0</servicecomb.version>
         <dtm.version>3.0.4</dtm.version>
         <mysql.version>8.0.16</mysql.version>
-        <druid.version>1.1.16</druid.version>
         <rocketmq.version>4.8.0</rocketmq.version>
+        <kafka.version>2.8.1</kafka.version>
         <commons-beanutils>1.9.4</commons-beanutils>
     </properties>
 
@@ -44,6 +46,16 @@
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-client</artifactId>
                 <version>${rocketmq.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.huawei.middleware.dtm</groupId>
+                <artifactId>dtm-client-tcc-mq-kafka</artifactId>
+                <version>${dtm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-clients</artifactId>
+                <version>${kafka.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.servicecomb</groupId>

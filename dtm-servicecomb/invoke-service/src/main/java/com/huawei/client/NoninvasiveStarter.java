@@ -23,6 +23,12 @@ public class NoninvasiveStarter {
 
     private static final int ACCOUNT = 500;
 
+    public static final int MICRO_TRANSFER = 0;
+
+    public static final int MQ_TRANS = 1;
+
+    public static final int KAFKA_TRANS = 2;
+
     private final TransferService transferService = new TransferService();
 
     public void start() throws Exception {
@@ -48,10 +54,13 @@ public class NoninvasiveStarter {
                         transferService.queryBankMoney();
                         break;
                     case DTM_TRANSFER_MICRO:
-                        transferService.doExecuteMicro(userIds, false);
+                        transferService.doExecuteMicro(userIds, MICRO_TRANSFER);
                         break;
                     case DTM_MQ_MICRO:
-                        transferService.doExecuteMicro(userIds, true);
+                        transferService.doExecuteMicro(userIds, MQ_TRANS);
+                        break;
+                    case DTM_KAFKA_MICRO:
+                        transferService.doExecuteMicro(userIds, KAFKA_TRANS);
                         break;
                     case DTM_TCC_MICRO:
                         transferService.transferTcc();

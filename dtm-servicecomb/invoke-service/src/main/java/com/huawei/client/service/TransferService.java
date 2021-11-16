@@ -24,6 +24,12 @@ public class TransferService {
 
     public static final int TRAN_MONEY = 100;
 
+    public static final int MICRO_TRANSFER = 0;
+
+    public static final int MQ_TRANS = 1;
+
+    public static final int KAFKA_TRANS = 2;
+
     public static final int ACCOUNT = 500;
 
     private static final String PRINT_TMPL = "|%14s|%19s|%19s|%13s|";
@@ -43,6 +49,9 @@ public class TransferService {
     private static final String MQ_TRANSFER
         = "cse://dtm-mq/bank-mq/transfer?id=%s&money=%s&errRate=%s";
 
+    private static final String KAFKA_TRANSFER
+        = "cse://dtm-kafka/bank-kafka/transfer?id=%s&money=%s&errRate=%s";
+
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(TransferService.class);
 
     private final RestTemplate restInvoker = RestTemplateBuilder.create();
@@ -52,7 +61,7 @@ public class TransferService {
     /**
      * 微服务调用bankA转入、bankB转出
      */
-    public void doExecuteMicro(List<Integer> userIds, boolean mq) throws Exception {
+    public void doExecuteMicro(List<Integer> userIds, int type) throws Exception {
         CmdUtils.println("请输入线程数量:单线程事务数量:异常概率");
         String input = console.readLine();
         int threadNum = Integer.parseInt(input.split(":")[0]);
@@ -74,12 +83,16 @@ public class TransferService {
             new Thread(() -> {
                 for (int j = 0; j < txNum; j++) {
                     try {
-                        if (mq) {
-                            restInvoker.getForObject(String.format(MQ_TRANSFER,
-                                userIds.get((count * txNum + j)) % ACCOUNT, TRAN_MONEY, errRate), String.class);
-                        } else {
-                            restInvoker.getForObject(String.format(CENTER_TRANSFER,
-                                userIds.get((count * txNum + j)) % ACCOUNT, TRAN_MONEY, errRate), String.class);
+                        switch (type) {
+                            case MICRO_TRANSFER:
+                                restInvoker.getForObject(String.format(CENTER_TRANSFER, userIds.get((count * txNum + j)) % ACCOUNT, TRAN_MONEY, errRate), String.class);
+                                break;
+                            case MQ_TRANS:
+                                restInvoker.getForObject(String.format(MQ_TRANSFER, userIds.get((count * txNum + j)) % ACCOUNT, TRAN_MONEY, errRate), String.class);
+                                break;
+                            case KAFKA_TRANS:
+                                restInvoker.getForObject(String.format(KAFKA_TRANSFER, userIds.get((count * txNum + j)) % ACCOUNT, TRAN_MONEY, errRate), String.class);
+                                break;
                         }
                         Thread.sleep(100);
                     } catch (Exception e) {
