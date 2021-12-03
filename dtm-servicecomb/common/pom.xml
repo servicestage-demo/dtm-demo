@@ -32,6 +32,12 @@
         <dependency>
             <groupId>com.huawei.middleware.dtm</groupId>
             <artifactId>dtm-servicecomb-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>log4j-core</artifactId>
+                    <groupId>org.apache.logging.log4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
