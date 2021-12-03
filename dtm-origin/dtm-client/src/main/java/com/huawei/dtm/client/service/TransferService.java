@@ -40,6 +40,7 @@ public class TransferService {
     @DTMTxBegin(appName = "transfer-local")
     public void transferLocal(int userId, int money, int errRate) {
         bankAService.transferIn(userId, money);
+        Thread.sleep(200);
         ExceptionUtils.addRuntimeException(errRate);
         bankBService.transferOut(userId, money);
     }
