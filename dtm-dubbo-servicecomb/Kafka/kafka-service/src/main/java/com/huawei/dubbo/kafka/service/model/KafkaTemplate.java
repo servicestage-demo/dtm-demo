@@ -34,7 +34,6 @@ public class KafkaTemplate implements InitializingBean, DisposableBean {
         String uuid = UUID.randomUUID().toString();
         String msgBody = uuid + "__" + money + "__" + userId;
         ProducerRecord<String, String> record = new ProducerRecord<>("dtm-kafka", msgBody);
-        producer.beginTransaction();
         producer.send(record);
     }
 }

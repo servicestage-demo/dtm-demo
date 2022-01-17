@@ -25,11 +25,8 @@ public class WebConfig {
         props.put("value.serializer", StringSerializer.class.getName());
         // 必须设置的
         props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
-        props.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "dtm-kafka-tx");
         props.put("retries", 3);
-        DtmKafkaProducer<String, String> producer = new DtmKafkaProducer<>(props);
-        producer.initTransactions();
-        return producer;
+        return new DtmKafkaProducer<>(props);
     }
 
     @Bean
