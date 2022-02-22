@@ -94,6 +94,7 @@ public class ClientStarter implements ApplicationRunner {
                     int money = 100;
                     try {
                         transferService.transferLocal(userIds.get((count * txNum + j) % ACCOUNT), money, errRate);
+                        Thread.sleep(100);
                     } catch (Exception e) {
                         // ignore
                     }
