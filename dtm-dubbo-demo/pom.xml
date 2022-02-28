@@ -28,7 +28,7 @@
         <spring-cloud.version>Hoxton.SR11</spring-cloud.version>
         <spring-boot.version>2.3.10.RELEASE</spring-boot.version>
         <zookeper.version>3.4.12</zookeper.version>
-        <dtm.version>3.0.4</dtm.version>
+        <dtm.version>3.0.6</dtm.version>
         <rocketmq.version>4.8.0</rocketmq.version>
         <snake.yaml.version>1.26</snake.yaml.version>
         <commons-beanutils>1.9.4</commons-beanutils>
