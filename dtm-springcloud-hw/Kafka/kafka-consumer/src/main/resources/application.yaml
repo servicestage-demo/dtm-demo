@@ -2,6 +2,8 @@ server:
   port: 8205
 
 spring:
+  kafka:
+    bootstrapServers: ${bootstrap_servers}  
   datasource:
     bank:
       username: ${db_user_name}
