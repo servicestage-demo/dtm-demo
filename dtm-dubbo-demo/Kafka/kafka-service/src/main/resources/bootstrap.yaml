@@ -1,6 +1,8 @@
 spring:
   application:
     name: kafka-service
+  kafka:
+    bootstrapServers: ${bootstrap_servers}
   main:
     allow-bean-definition-overriding: true
   cloud:
