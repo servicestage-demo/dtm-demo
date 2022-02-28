@@ -36,6 +36,9 @@ public class WebConfig {
 
     @Value("${spring.datasource.bank.driver-class-name}")
     private String driverClassName;
+    
+    @Value("${spring.kafka.bootstrapServers}")
+    private String bootstrapServers;
 
     @Bean(name = "bankDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.bank")
@@ -64,7 +67,7 @@ public class WebConfig {
     @Bean
     public KafkaConsumer<String, String> kafkaConsumer() {
         Properties props = new Properties();
-        props.put("bootstrap.servers", "127.0.0.1:9092");
+        props.put("bootstrap.servers", bootstrapServers);
         props.put("group.id", "test-group");
         props.put("enable.auto.commit", true);
         props.put("auto.commit.interval.ms", 1000);
