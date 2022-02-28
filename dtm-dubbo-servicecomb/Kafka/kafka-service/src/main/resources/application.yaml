@@ -4,4 +4,6 @@ server:
 spring:
   application:
     name: kafka-service
+  kafka:
+    bootstrapServers: ${bootstrap_servers} 
 
