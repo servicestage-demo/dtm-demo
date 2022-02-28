@@ -23,7 +23,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <servicecomb.version>2.5.0</servicecomb.version>
-        <dtm.version>3.0.4</dtm.version>
+        <dtm.version>3.0.6</dtm.version>
         <mysql.version>8.0.16</mysql.version>
         <rocketmq.version>4.8.0</rocketmq.version>
         <kafka.version>2.8.1</kafka.version>
