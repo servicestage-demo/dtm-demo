@@ -21,7 +21,7 @@ public class WebConfig {
     @Bean
     public DtmKafkaProducer<String, String> dtmKafkaProducer() {
         Properties props = new Properties();
-        props.put("bootstrap.servers", "127.0.0.1:9092");
+        props.put("bootstrap.servers", bootstrapServers);
         props.put("acks", "all");
         props.put("batch.size", 16384);
         props.put("key.serializer", StringSerializer.class.getName());
