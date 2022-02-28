@@ -14,6 +14,8 @@ spring:
       password: ${db_user_pwd}
       url: jdbc:mysql://${db_ip}:3306/bankb?verifyServerCertificate=false&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       driver-class-name: com.mysql.cj.jdbc.Driver
+  kafka:
+    bootstrapServers: ${bootstrap_servers}
 eureka:
   client:
     serviceUrl:
