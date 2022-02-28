@@ -31,3 +31,5 @@ servicecomb:
 spring:
   main:
     allow-bean-definition-overriding: true
+  kafka:
+    bootstrapServers: ${bootstrap_servers}  
