@@ -6,6 +6,7 @@ import com.huawei.middleware.dtm.client.tcc.kafka.DtmKafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,11 +14,14 @@ import java.util.Properties;
 
 @Configuration
 public class WebConfig {
+    
+    @Value("${spring.kafka.bootstrapServers}")
+    private String bootstrapServers;
 
     @Bean
     public DtmKafkaProducer<String, String> dtmKafkaProducer() {
         Properties props = new Properties();
-        props.put("bootstrap.servers", "127.0.0.1:9092");
+        props.put("bootstrap.servers", bootstrapServers);
         props.put("acks", "all");
         props.put("batch.size", 16384);
         props.put("key.serializer", StringSerializer.class.getName());
