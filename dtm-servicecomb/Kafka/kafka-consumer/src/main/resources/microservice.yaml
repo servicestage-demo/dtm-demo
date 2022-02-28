@@ -31,6 +31,8 @@ servicecomb:
 spring:
   main:
     allow-bean-definition-overriding: true
+  kafka:
+    bootstrapServers: ${bootstrap_servers}  
   datasource:
     bank:
       username: ${db_user_name}
