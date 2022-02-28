@@ -9,6 +9,8 @@ spring:
     name: dtm-kafka
   main:
     allow-bean-definition-overriding: true
+  kafka:
+    bootstrapServers: ${bootstrap_servers}  
   cloud:
     servicecomb:
       discovery:
