@@ -32,7 +32,7 @@
         <rocketmq.version>4.8.0</rocketmq.version>
         <snake.yaml.version>1.26</snake.yaml.version>
         <commons-beanutils>1.9.4</commons-beanutils>
-        <kafka.version>2.8.1</kafka.version>
+        <kafka.version>2.3.0</kafka.version>
     </properties>
 
     <dependencyManagement>
